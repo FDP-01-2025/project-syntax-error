@@ -57,3 +57,5 @@ void mostrarNombresDePokemonsPorTipo(const vector<Pokemon>& listaPokemons, const
 }
 
 #endif 
+
+//TODO: Funcion para mostrar stats y confirmar seleccion o retornar 
