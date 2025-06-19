@@ -1,38 +1,55 @@
 #include <iostream>
-#include <conio.h>
-#include <windows.h>
-#include <vector>
-#include "./headers/Pokemon.h"
-#include "./headers/PokemonType.h"
+#include <conio.h>       // Para leer teclas del teclado (getch)
+#include <windows.h>     // Para cambiar el color del texto en la consola
+#include <vector>       // Para usar listas de datos (como arreglos mejorados)
+
+#include "./headers/Pokemon.h"      // Archivo con la definición de qué es un Pokémon (nombre, tipo, ataques)
+#include "./headers/PokemonType.h"  // Archivo con la definición de los tipos de Pokémon (nombre y color)
 
 using namespace std;
 
 vector<PokemonType> pokemonTypes = {
     {"Agua", 3},
-    {"Fuego", 13},
+    {"Fuego", 12},
+    {"Tierra", 5},
     {"Planta", 2},
-    {"Electrico", 14},
+    {"Electrico", 6},
     {"Normal", 7},
 };
 
 vector<Pokemon> listaPokemons = {
     {"Charmander", "Fuego", 39, 65, 22, 17, 30},
     {"Growlithe", "Fuego", 55, 60, 25, 20, 35},
+    {"Scorbunny", "Fuego",},
+    {"Flareon", "Fuego",},
     {"Squirtle", "Agua", 44, 43, 20, 15, 25},
+    {"Blastoise", "Agua", },
+    {"Gyarados" "Agua",},
     {"Psyduck", "Agua", 50, 55, 22, 18, 30},
     {"Bulbasaur", "Planta", 45, 45, 18, 14, 27},
     {"Oddish", "Planta", 45, 30, 15, 15, 28},
+    {"Leafeon", "Planta",},
+    {"Grookey", "Planta",},
     {"Pikachu", "Electrico", 35, 90, 25, 20, 40},
-    {"Magnemite", "Electrico", 25, 45, 30, 25, 35},
+    {"Jolteon", "Electrico", 45, 75, 20, 26, 50},
+    {"Gengar", "Electrico", 25, 45, 30, 25, 35},
+    {"Haunter", "Electrico",},
     {"Eevee", "Normal", 55, 55, 23, 18, 28},
-    {"Meowth", "Normal", 40, 90, 20, 17, 25}
+    {"Snorlax", "Normal", },
+    {"Pidgey", "Normal",},
+    {"Meowth", "Normal", 40, 90, 20, 17, 25},
+    {"Sandshrew", "Tierra", 50, 40, 20, 15, 25},
+    {"Diglett", "Tierra", 10, 95, 25, 20, 30},
+    {"Cubone", "Tierra",},
+    {"Onix", "Tierra"}
 };
 
-int typeCursor = 0;
-int pokemonCursor = 0;
-char key;
-string selectedType;
-string selectedPokemon;
+// Variables para moverse en el menú
+int typeCursor = 0;     // en qué tipo estás parado
+int pokemonCursor = 0;  // en qué Pokémon estás parado
+char key;               // qué tecla presionaste
+string selectedType;    // qué tipo elegiste
+string selectedPokemon; // qué Pokémon elegiste
 
 void setColor(int color)
 {
@@ -63,7 +80,7 @@ void showPokemonTypes()
     }
 }
 
-// Filtra los pokémon por tipo
+// Filtra los Pokémon por tipo
 vector<Pokemon> getPokemonsOfType(const vector<Pokemon>& pokemonList, const string& type)
 {
     vector<Pokemon> filtered;
@@ -80,7 +97,7 @@ void showPokemonsOfType(const vector<Pokemon>& filteredPokemons, int cursor, int
     system("cls");
     cout << "Elige un pokémon de tipo ";
     setColor(color);
-    cout << filteredPokemons[0].type << endl;
+    cout << filteredPokemons[0].type << "!" << endl;
     setColor(7);
 
     for (int i = 0; i < filteredPokemons.size(); i++)
@@ -97,6 +114,7 @@ void showPokemonsOfType(const vector<Pokemon>& filteredPokemons, int cursor, int
         }
     }
 }
+
 
 int main()
 {
@@ -162,5 +180,24 @@ int main()
     setColor(7);
     cout << " de tipo " << selectedType << "!" << endl;
 
+    // Buscar el Pokémon seleccionado
+    Pokemon elegido;
+    for (const auto& p : pokemonsFiltrados)
+    {
+        if (p.name == selectedPokemon)
+        {
+            elegido = p;
+            break;
+        }
+    }
+
+    // Mostrar los stats
+    elegido.mostrarStats();
+
+    // TO DO: hacer el llamado de la funcion seleccion
+
+
+
     return 0;
 }
+
