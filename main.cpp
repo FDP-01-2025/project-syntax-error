@@ -5,6 +5,7 @@
 
 #include "src/Pokemon.h"      // Archivo con la definición de qué es un Pokémon (nombre, tipo, ataques)
 #include "src/PokemonType.h"  // Archivo con la definición de los tipos de Pokémon (nombre y color)
+#include "src/Menu.h"
 
 using namespace std;
 
@@ -51,10 +52,6 @@ char key;               // qué tecla presionaste
 string selectedType;    // qué tipo elegiste
 string selectedPokemon; // qué Pokémon elegiste
 
-void setColor(int color)
-{
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
-}
 
 void showPokemonTypes()
 {
@@ -118,6 +115,13 @@ void showPokemonsOfType(const vector<Pokemon>& filteredPokemons, int cursor, int
 
 int main()
 {
+
+    int modo = seleccionarModoJuego();
+    system("pause");
+
+
+
+
        while (true)   //Este bucle se repite hasta que el usuario confirme la seleccion de un Pokémon
     {
         //Limpiamos las variables para que el usuario pueda elegir de nuevo
