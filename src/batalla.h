@@ -1,37 +1,25 @@
 #ifndef BATALLA_H
 #define BATALLA_H
 
-#include <memory>
+#include <vector>
+#include <string>
 #include "pokemon.h"
-#include "pokemonMove.h"
+#include "pokemonType.h"
 
-class Batalla
-{
-private:
-    std::shared_ptr<Pokemon> jugador1;
-    std::shared_ptr<Pokemon> jugador2;
-    int marcadorJugador1;
-    int marcadorJugador2;
-    int rondasJugadas;
-    int turnoActual;
-    bool ataqueEspecialJ1;
-    bool ataqueEspecialJ2;
+// Filtra los Pokémon por tipo
+std::vector<Pokemon> getPokemonsOfType(const std::vector<Pokemon>& lista, const std::string& tipo);
 
-    void mostrarEstado() const;
-    void ejecutarTurno(std::shared_ptr<Pokemon> &atacante, std::shared_ptr<Pokemon> &defensor, bool &especialUsado);
-    bool determinarOrdenDeAtaque() const;
-    void mostrarGanadorDeRonda();
-    void actualizarMarcador();
-    void reiniciarRonda();
+// Muestra los tipos de Pokémon con color y cursor
+void showPokemonTypes(const std::vector<PokemonType>& tipos, int cursor);
 
-public:
-    Batalla();
+// Muestra los Pokémon filtrados por tipo con color y cursor
+void showPokemonsOfType(const std::vector<Pokemon>& listaFiltrada, int cursor, int color);
 
-    void iniciarJuego();
-    void seleccionarPokemons();
-    void iniciarRonda();
-    bool finDelJuego() const;
-    void mostrarGanadorFinal() const;
-};
+// Confirmación divertida del Pokémon seleccionado
+bool confirmarSeleccionDivertida(const std::string& nombrePokemon);
+
+// Función para elegir el modo de juego
+int seleccionarModoJuego();
 
 #endif
+
