@@ -6,12 +6,12 @@
 #include <vector>
 using namespace std;
 
-// Estructura para mostrar un Pokémon con sus stats
 struct PokemonType
 {
     string name;
     int color;
+};
 
-}; 
+int seleccionarTipoPokemon(const vector<PokemonType>& tipos);
+
 #endif
-

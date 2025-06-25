@@ -1,29 +1,25 @@
-#ifndef MENU_H
-#define MENU_H
-
+#include "../include/Menu.h"
+#include <windows.h>
+#include <conio.h>
 #include <iostream>
 #include <vector>
-#include <conio.h>
-#include <windows.h>
 #include <string>
+#include <thread>
 
 using namespace std;
 
-// Cambiar color texto consola
-inline void setColor(int color)
+void setColor(int color)
 {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
 
-// Mover cursor a (x, y)
-inline void setCursorPosition(int x, int y)
+void setCursorPosition(int x, int y)
 {
-    COORD coord = { (SHORT)x, (SHORT)y };
+    COORD coord = {(SHORT)x, (SHORT)y};
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
-// Imprime texto con efecto máquina de escribir (sin salto de línea automático)
-inline void imprimirAnimado(const string& texto, int ms = 30)
+void imprimirAnimado(const string &texto, int ms)
 {
     for (char c : texto)
     {
@@ -32,8 +28,7 @@ inline void imprimirAnimado(const string& texto, int ms = 30)
     }
 }
 
-// Imprime opciones con cursor resaltado a partir de startY
-inline void imprimirOpciones(const vector<string>& opciones, int cursor, int startY)
+void imprimirOpciones(const vector<string> &opciones, int cursor, int startY)
 {
     for (size_t i = 0; i < opciones.size(); i++)
     {
@@ -51,20 +46,18 @@ inline void imprimirOpciones(const vector<string>& opciones, int cursor, int sta
     }
 }
 
-// Función para seleccionar modo de juego con bienvenida animada solo UNA VEZ
-inline int seleccionarModoJuego()
+int seleccionarModoJuego()
 {
     vector<string> opciones = {
         "Modo Solitario",
-        "Modo Duo"
-    };
+        "Modo Duo"};
 
     system("cls");
 
     // Animación bienvenida (solo UNA VEZ)
     setColor(6);
     imprimirAnimado("Bienvenido a la Arena Pokemon!  \n\n", 25);
-    
+
     setColor(11);
     imprimirAnimado("Selecciona tu modo de batalla:\n", 20);
     setColor(7);
@@ -85,12 +78,14 @@ inline int seleccionarModoJuego()
             if (tecla == 72) // Flecha arriba
             {
                 cursor--;
-                if (cursor < 0) cursor = (int)opciones.size() - 1;
+                if (cursor < 0)
+                    cursor = (int)opciones.size() - 1;
             }
             else if (tecla == 80) // Flecha abajo
             {
                 cursor++;
-                if (cursor >= (int)opciones.size()) cursor = 0;
+                if (cursor >= (int)opciones.size())
+                    cursor = 0;
             }
         }
         else if (tecla == 13) // Enter
@@ -105,5 +100,3 @@ inline int seleccionarModoJuego()
         imprimirOpciones(opciones, cursor, opcionesStartY);
     }
 }
-
-#endif

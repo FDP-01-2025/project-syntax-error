@@ -1,11 +1,11 @@
 #include <iostream>
-#include <conio.h>       // Para leer teclas del teclado (getch)
-#include <windows.h>     // Para cambiar el color del texto en la consola
-#include <vector>       // Para usar listas de datos (como arreglos mejorados)
+#include <conio.h>
+#include <windows.h>
+#include <vector>
 
-#include "src/Pokemon.h"      // Archivo con la definición de qué es un Pokémon (nombre, tipo, ataques)
-#include "src/PokemonType.h"  // Archivo con la definición de los tipos de Pokémon (nombre y color)
-#include "src/Menu.h"
+#include "include/Menu.h"
+#include "include/Pokemon.h"
+#include "include/PokemonType.h"
 
 using namespace std;
 
@@ -45,125 +45,33 @@ vector<Pokemon> listaPokemons = {
     {"Onix", "Tierra",  44, 43, 20, 15, 25}
 };
 
-// Variables para moverse en el menú
-int typeCursor = 0;     // en qué tipo estás parado
-int pokemonCursor = 0;  // en qué Pokémon estás parado
-char key;               // qué tecla presionaste
-string selectedType;    // qué tipo elegiste
-string selectedPokemon; // qué Pokémon elegiste
-
-
-void showPokemonTypes()
-{
-    system("cls");
-    cout << "Jugador 1:" << endl;
-    cout << "Selecciona el tipo de Pokemon que deseas:" << endl;
-
-    for (int i = 0; i < pokemonTypes.size(); i++)
-    {
-        if (i == typeCursor)
-        {
-            setColor(pokemonTypes[i].color);
-            cout << " > " << pokemonTypes[i].name << " <" << endl;
-            setColor(7);
-        }
-        else
-        {
-            setColor(pokemonTypes[i].color);
-            cout << "   " << pokemonTypes[i].name << endl;
-            setColor(7);
-        }
-    }
-}
-
-// Filtra los Pokémon por tipo
-vector<Pokemon> getPokemonsOfType(const vector<Pokemon>& pokemonList, const string& type)
-{
-    vector<Pokemon> filtered;
-    for (const auto& p : pokemonList)
-    {
-        if (p.type == type)
-            filtered.push_back(p);
-    }
-    return filtered;
-}
-
-void showPokemonsOfType(const vector<Pokemon>& filteredPokemons, int cursor, int color)
-{
-    system("cls");
-    cout << "Elige un pokemon de tipo ";
-    setColor(color);
-    cout << filteredPokemons[0].type << "!" << endl;
-    setColor(7);
-
-    for (int i = 0; i < filteredPokemons.size(); i++)
-    {
-        if (i == cursor)
-        {
-            setColor(color);
-            cout << " > " << filteredPokemons[i].name << " <" << endl;
-            setColor(7);
-        }
-        else
-        {
-            cout << "   " << filteredPokemons[i].name << endl;
-        }
-    }
-}
-
-
 int main()
 {
-
     int modo = seleccionarModoJuego();
     system("pause");
 
+    string selectedType;
+    string selectedPokemon;
 
-
-
-       while (true)   //Este bucle se repite hasta que el usuario confirme la seleccion de un Pokémon
+    while (true)
     {
-        //Limpiamos las variables para que el usuario pueda elegir de nuevo
-        selectedType = "";    
+        selectedType = "";
         selectedPokemon = "";
 
-        // Selección de tipo
-        while (selectedType == "")  //Mientras no haya elegido un tipo 
-        {
-            showPokemonTypes();  // Se muestra en pantalla los tipos de pokémon
+        // Selección de tipo usando función interactiva
+        int tipoSeleccionado = seleccionarTipoPokemon(pokemonTypes);
+        selectedType = pokemonTypes[tipoSeleccionado].name;
+        int colorSeleccionado = pokemonTypes[tipoSeleccionado].color;
 
-            key = getch(); // Espera que el usuario seleccione una tecla 
-
-            switch (key)
-            {
-            case 72: // Flecha arriba
-                typeCursor--;
-                if (typeCursor < 0)
-                    typeCursor = pokemonTypes.size() - 1;
-                break;
-            case 80: // Flecha abajo
-                typeCursor++;
-                if (typeCursor >= pokemonTypes.size())
-                    typeCursor = 0;
-                break;
-            case 13: // Enter
-                selectedType = pokemonTypes[typeCursor].name;
-                break;
-            default:
-                break;
-            }
-        }
-
-        // Ahora que ya eligió un tipo, filtramos solo los Pokémon que son de ese tipo
+        // Filtrar pokémon por tipo
         vector<Pokemon> pokemonsFiltrados = getPokemonsOfType(listaPokemons, selectedType);
-        int colorSeleccionado = pokemonTypes[typeCursor].color;
 
-        // Selección de pokémon
-        pokemonCursor = 0;
+        // Selección de pokémon usando función interactiva
+        int pokemonCursor = 0;
         while (selectedPokemon == "")
         {
             showPokemonsOfType(pokemonsFiltrados, pokemonCursor, colorSeleccionado);
-            key = getch();
+            char key = getch();
             switch (key)
             {
             case 72: // Flecha arriba
@@ -184,7 +92,7 @@ int main()
             }
         }
 
-        system("cls"); // Limpia la pantalla
+        system("cls");
         cout << "Has seleccionado a ";
         setColor(colorSeleccionado);
         cout << selectedPokemon;
@@ -202,8 +110,6 @@ int main()
             }
         }
 
-
-
         // Mostrar los stats
         elegido.mostrarStats();
 
@@ -211,22 +117,19 @@ int main()
         bool confirmado = confirmarSeleccionDivertida(elegido.name);
         if (confirmado)
         {
-            // Confirmó, salimos del ciclo y seguimos el programa
             break;
         }
         else
         {
-            // No confirmó, mostramos mensaje y repetimos todo el proceso (tipo y Pokémon)
             cout << "\nRegresando al menu para que elijas otro Pokemon...\n";
             system("pause");
         }
     }
 
-    // Aquí continúa el programa luego de confirmar selección
+// PARA COMPLIAR EL PROYECTO HASTA ESTE AVANCE, SE NECESITA ESTE COMANDO:
+// g++ .\main.cpp .\utils\menuFunctions.cpp .\utils\pokemon.cpp .\utils\pokemonType.cpp {} -o main
 
-
-
-
+// SI SE CREAN MAS COSAS, SE AGREGA AQUI (QUITEN {} -------------------------------------↑
     return 0;
 }
 

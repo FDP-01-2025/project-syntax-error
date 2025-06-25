@@ -13,7 +13,7 @@ Este proyecto consiste en un **juego de batalla por turnos basado en el universo
 1. **Nombre completo:** [Alejandro Antonio Méndez Marenco]  
    **Carnet:** [00085425]
 
-2. **Nombre completo:** [Gabriela Michelle Navas Quinteros ]  
+2. **Nombre completo:** [Gabriela Michelle Navas Quinteros]  
    **Carnet:** [00167525]
 
 3. **Nombre completo:** [Evelyn Michelle Miranda Acuña]  
@@ -23,7 +23,7 @@ Este proyecto consiste en un **juego de batalla por turnos basado en el universo
 
 1. Clona este repositorio en tu máquina local:
    ```bash
-   git clone [URL del repositorio]
+   git clone [https://github.com/FDP-01-2025/project-syntax-error](https://github.com/FDP-01-2025/project-syntax-error)
    cd project-syntax-error/
    code .
 
