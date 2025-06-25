@@ -55,20 +55,20 @@ inline void imprimirOpciones(const vector<string>& opciones, int cursor, int sta
 inline int seleccionarModoJuego()
 {
     vector<string> opciones = {
-        "🌟 Modo Solitario",
-        "👥 Modo Dúo"
+        "Modo Solitario",
+        "Modo Duo"
     };
 
     system("cls");
 
     // Animación bienvenida (solo UNA VEZ)
     setColor(6);
-    imprimirAnimado(" ¡Bienvenido a la Arena Pokémon!  \n\n", 25);
+    imprimirAnimado("Bienvenido a la Arena Pokemon!  \n\n", 25);
     
     setColor(11);
     imprimirAnimado("Selecciona tu modo de batalla:\n", 20);
     setColor(7);
-    cout << "(Usa las flechas ↑ ↓ y presiona Enter)\n";
+    cout << "Usa las flechas de tu teclado para moverte y presiona [Enter] para seleccionar.";
 
     int cursor = 0;
     const int opcionesStartY = 6; // Posición vertical donde comienzan las opciones
@@ -97,7 +97,7 @@ inline int seleccionarModoJuego()
         {
             setCursorPosition(0, opcionesStartY + (int)opciones.size() + 2);
             setColor(10);
-            cout << "\n🎮 ¡Modo seleccionado! Preparando tu aventura...\n";
+            cout << "\n\nModo seleccionado! Preparando tu aventura...\n";
             setColor(7);
             return cursor + 1;
         }

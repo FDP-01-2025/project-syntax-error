@@ -63,20 +63,20 @@ void showPokemonsNameByType(const vector<Pokemon> &listaPokemons, const string &
 bool confirmarSeleccionDivertida(const string& nombrePokemon)
 {
     char respuesta;
-    cout << "🌟 ¡Entrenador! ¿Seguro que quieres atrapar a " << nombrePokemon << "? 🌟\n";
-    cout << "Presiona 's' para lanzarle la Pokéball o 'n' para pensar un poco más: ";
+    cout << "Entrenador! Seguro que quieres atrapar a " << nombrePokemon << "? \n";
+    cout << "Presiona 's' para lanzarle la Pokeball o 'n' para pensar un poco mas: ";
     cin >> respuesta;
 
     respuesta = tolower(respuesta);
 
     if (respuesta == 's')
     {
-        cout << "🎉 ¡Genial! " << nombrePokemon << " es ahora parte de tu equipo. ¡Vamos a la batalla! ⚔️\n";
+        cout << "Genial! " << nombrePokemon << " es ahora parte de tu equipo. ¡Vamos a la batalla! \n";
         return true;
     }
     else
     {
-        cout << "🤔 Está bien, piensa bien tu estrategia. ¡El equipo perfecto te espera!\n";
+        cout << ". . . Esta bien, piensa bien tu estrategia. El equipo perfecto te espera!\n";
         return false;
     }
 }

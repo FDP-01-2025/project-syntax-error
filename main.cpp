@@ -56,9 +56,8 @@ string selectedPokemon; // qué Pokémon elegiste
 void showPokemonTypes()
 {
     system("cls");
-    cout << "Bienvenido a Pokemon Battle!" << endl;
-    cout << "Para seleccionar un tipo, presiona la tecla [Enter]." << endl;
-    cout << "Para mover el cursor, usa las teclas [Flecha Arriba] o [Flecha Abajo]." << endl;
+    cout << "Jugador 1:" << endl;
+    cout << "Selecciona el tipo de Pokemon que deseas:" << endl;
 
     for (int i = 0; i < pokemonTypes.size(); i++)
     {
@@ -92,7 +91,7 @@ vector<Pokemon> getPokemonsOfType(const vector<Pokemon>& pokemonList, const stri
 void showPokemonsOfType(const vector<Pokemon>& filteredPokemons, int cursor, int color)
 {
     system("cls");
-    cout << "Elige un pokémon de tipo ";
+    cout << "Elige un pokemon de tipo ";
     setColor(color);
     cout << filteredPokemons[0].type << "!" << endl;
     setColor(7);
@@ -186,7 +185,7 @@ int main()
         }
 
         system("cls"); // Limpia la pantalla
-        cout << "¡Has seleccionado a ";
+        cout << "Has seleccionado a ";
         setColor(colorSeleccionado);
         cout << selectedPokemon;
         setColor(7);
@@ -203,6 +202,8 @@ int main()
             }
         }
 
+
+
         // Mostrar los stats
         elegido.mostrarStats();
 
@@ -216,7 +217,7 @@ int main()
         else
         {
             // No confirmó, mostramos mensaje y repetimos todo el proceso (tipo y Pokémon)
-            cout << "\nRegresando al menú para que elijas otro Pokémon...\n";
+            cout << "\nRegresando al menu para que elijas otro Pokemon...\n";
             system("pause");
         }
     }
