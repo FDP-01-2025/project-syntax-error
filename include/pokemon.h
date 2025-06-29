@@ -1,13 +1,10 @@
 #ifndef POKEMON_H
 #define POKEMON_H
 
-#include <iostream>
 #include <string>
-#include <vector>
-
 using namespace std;
-struct Pokemon
-{
+
+struct Pokemon {
     string name;
     string type;
     int hp;
@@ -19,9 +16,10 @@ struct Pokemon
     void mostrarStats() const;
 };
 
-vector<Pokemon> getPokemonsOfType(const vector<Pokemon>& pokemonList, const string& type);
-void showPokemonsOfType(const vector<Pokemon>& filteredPokemons, int cursor, int color);
-void showPokemonsNameByType(const vector<Pokemon>& listaPokemons, const string& tipoBuscado);
+// Declaraciones de funciones
+int getPokemonsOfType(const Pokemon lista[], int listaSize, const string& tipo, Pokemon filtrados[], int maxFiltrados);
+void showPokemonsOfType(const Pokemon filtered[], int count, int cursor, int color);
+void showPokemonsNameByType(const Pokemon lista[], int listaSize, const string& tipo);
 bool confirmarSeleccionDivertida(const string& nombrePokemon);
 
 #endif

@@ -2,7 +2,6 @@
 #include <windows.h>
 #include <conio.h>
 #include <iostream>
-#include <vector>
 #include <string>
 #include <thread>
 
@@ -28,12 +27,13 @@ void imprimirAnimado(const string &texto, int ms)
     }
 }
 
-void imprimirOpciones(const vector<string> &opciones, int cursor, int startY)
+// Cambiamos a arreglo estático con tamaño fijo
+void imprimirOpciones(const string opciones[], int opcionesSize, int cursor, int startY)
 {
-    for (size_t i = 0; i < opciones.size(); i++)
+    for (int i = 0; i < opcionesSize; i++)
     {
-        setCursorPosition(0, startY + (int)i);
-        if ((int)i == cursor)
+        setCursorPosition(0, startY + i);
+        if (i == cursor)
         {
             setColor(112); // Fondo azul claro, texto blanco
             cout << " > " << opciones[i] << " <  ";
@@ -48,25 +48,26 @@ void imprimirOpciones(const vector<string> &opciones, int cursor, int startY)
 
 int seleccionarModoJuego()
 {
-    vector<string> opciones = {
-        "Modo Solitario",
-        "Modo Duo"};
+    const int opcionesSize = 2;
+    string opciones[opcionesSize] = {
+        "Modo Dúo",
+        "Modo Solitario"};
 
     system("cls");
 
     // Animación bienvenida (solo UNA VEZ)
     setColor(6);
-    imprimirAnimado("Bienvenido a la Arena Pokemon!  \n\n", 25);
+    imprimirAnimado("¡Bienvenido a la Arena Pokémon!  \n\n", 25);
 
     setColor(11);
     imprimirAnimado("Selecciona tu modo de batalla:\n", 20);
     setColor(7);
-    cout << "Usa las flechas de tu teclado para moverte y presiona [Enter] para seleccionar.";
+    cout << "Navega usando las flechas del teclado y confirma tu opción con [Enter].";
 
     int cursor = 0;
-    const int opcionesStartY = 6; // Posición vertical donde comienzan las opciones
+    const int opcionesStartY = 5; // Posición vertical donde comienzan las opciones
 
-    imprimirOpciones(opciones, cursor, opcionesStartY);
+    imprimirOpciones(opciones, opcionesSize, cursor, opcionesStartY);
 
     while (true)
     {
@@ -79,24 +80,24 @@ int seleccionarModoJuego()
             {
                 cursor--;
                 if (cursor < 0)
-                    cursor = (int)opciones.size() - 1;
+                    cursor = opcionesSize - 1;
             }
             else if (tecla == 80) // Flecha abajo
             {
                 cursor++;
-                if (cursor >= (int)opciones.size())
+                if (cursor >= opcionesSize)
                     cursor = 0;
             }
         }
         else if (tecla == 13) // Enter
         {
-            setCursorPosition(0, opcionesStartY + (int)opciones.size() + 2);
+            setCursorPosition(0, opcionesStartY + opcionesSize + 1);
             setColor(10);
-            cout << "\n\nModo seleccionado! Preparando tu aventura...\n";
+            cout << "¡Modo seleccionado! Preparando tu aventura...\n";
             setColor(7);
             return cursor + 1;
         }
 
-        imprimirOpciones(opciones, cursor, opcionesStartY);
+        imprimirOpciones(opciones, opcionesSize, cursor, opcionesStartY);
     }
 }

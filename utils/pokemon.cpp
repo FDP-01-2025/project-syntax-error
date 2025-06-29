@@ -2,99 +2,86 @@
 #include "../include/Menu.h"
 #include <iostream>
 #include <string>
-#include <vector>
 #include <cctype>
 
 using namespace std;
 
-void Pokemon::mostrarStats() const
-{
+void Pokemon::mostrarStats() const {
     cout << "\n+---------------------------------+\n";
 
-    string titulo = " Estadisticas de " + name + " ";
+    string titulo = " Estadísticas de " + name + " ";
     int largoTotal = 31;
     int espacios = largoTotal - titulo.length();
     int izquierda = espacios / 2;
     int derecha = espacios - izquierda;
 
-    cout << "|" << string(izquierda, ' ') << titulo << string(derecha, ' ') << "  |\n";
+    cout << "|" << string(izquierda, ' ') << titulo << string(derecha, ' ') << "   |\n";
     cout << "+---------------------------------+\n";
 
     cout << "| Tipo:             " << type << string(14 - type.length(), ' ') << "|\n";
     cout << "| HP:               " << hp << string(14 - to_string(hp).length(), ' ') << "|\n";
     cout << "| Velocidad:        " << speed << string(14 - to_string(speed).length(), ' ') << "|\n";
-    cout << "| Ataque rapido:    " << fastattack << string(14 - to_string(fastattack).length(), ' ') << "|\n";
+    cout << "| Ataque rápido:    " << fastattack << string(14 - to_string(fastattack).length(), ' ') << "|\n";
     cout << "| Ataque normal:    " << normalattack << string(14 - to_string(normalattack).length(), ' ') << "|\n";
     cout << "| Ataque especial:  " << specialattack << string(14 - to_string(specialattack).length(), ' ') << "|\n";
-    cout << "+---------------------------------+\n";
+    cout << "+---------------------------------+\n\n";
 }
 
-// Filtra los Pokémon por tipo
-vector<Pokemon> getPokemonsOfType(const vector<Pokemon>& pokemonList, const string& type)
-{
-    vector<Pokemon> filtered;
-    for (const auto& p : pokemonList)
-    {
-        if (p.type == type)
-            filtered.push_back(p);
+// Filtra Pokémon por tipo, llenando arreglo filtrado y devolviendo la cantidad
+int getPokemonsOfType(const Pokemon listaPokemons[], int listaSize, const string& type, Pokemon filtrados[], int maxFiltrados) {
+    int count = 0;
+    for (int i = 0; i < listaSize && count < maxFiltrados; i++) {
+        if (listaPokemons[i].type == type) {
+            filtrados[count++] = listaPokemons[i];
+        }
     }
-    return filtered;
+    return count;
 }
 
-// Menú de selección de Pokémon de un tipo
-void showPokemonsOfType(const vector<Pokemon>& filteredPokemons, int cursor, int color)
-{
+// Menú para mostrar Pokémon filtrados por tipo
+void showPokemonsOfType(const Pokemon filteredPokemons[], int filteredCount, int cursor, int color) {
     system("cls");
-    cout << "Elige un pokemon de tipo ";
+    if (filteredCount == 0) return;
+
+    cout << "Elige un pokémon de tipo ";
     setColor(color);
-    cout << filteredPokemons[0].type << "!" << endl;
+    cout << filteredPokemons[0].type << "!\n" << endl;
     setColor(7);
 
-    for (int i = 0; i < filteredPokemons.size(); i++)
-    {
-        if (i == cursor)
-        {
+    for (int i = 0; i < filteredCount; i++) {
+        if (i == cursor) {
             setColor(color);
             cout << " > " << filteredPokemons[i].name << " <" << endl;
             setColor(7);
-        }
-        else
-        {
+        } else {
             cout << "   " << filteredPokemons[i].name << endl;
         }
     }
 }
 
-void showPokemonsNameByType(const vector<Pokemon>& listaPokemons, const string& tipoBuscado)
-{
-    cout << "Pokemons tipo " << tipoBuscado << " \n";
-    for (const auto& pokemon : listaPokemons)
-    {
-        if (pokemon.type == tipoBuscado)
-        {
-            cout << "  > " << pokemon.name << "\n";
+void showPokemonsNameByType(const Pokemon listaPokemons[], int listaSize, const string& tipoBuscado) {
+    cout << "Pokémons tipo " << tipoBuscado << " \n";
+    for (int i = 0; i < listaSize; i++) {
+        if (listaPokemons[i].type == tipoBuscado) {
+            cout << "  > " << listaPokemons[i].name << "\n";
         }
     }
-    cout << "\nElige y gana!\n";
+
 }
 
-bool confirmarSeleccionDivertida(const string& nombrePokemon)
-{
+bool confirmarSeleccionDivertida(const string& nombrePokemon) {
     char respuesta;
-    cout << "Entrenador! Seguro que quieres atrapar a " << nombrePokemon << "? \n";
-    cout << "Presiona 's' para lanzarle la Pokeball o 'n' para pensar un poco mas: ";
+    cout << "¡Entrenador! ¿Seguro que quieres atrapar a " << nombrePokemon << "? 🌟 \n\n";
+    cout << "Presiona 's' para lanzarle la Pokéball o 'n' para pensar un poco más:\n";
     cin >> respuesta;
 
     respuesta = tolower(respuesta);
 
-    if (respuesta == 's')
-    {
-        cout << "Genial! " << nombrePokemon << " es ahora parte de tu equipo. ¡Vamos a la batalla! \n";
+    if (respuesta == 's') {
+        cout << "¡Genial! 🎉  " << nombrePokemon << " es ahora parte de tu equipo. ¡Vamos a la batalla!\n\n";
         return true;
-    }
-    else
-    {
-        cout << ". . . Esta bien, piensa bien tu estrategia. El equipo perfecto te espera!\n";
+    } else {
+        cout << "\n🤔 . . . Está bien, piensa bien tu estrategia. ¡El equipo perfecto te espera!\n";
         return false;
     }
 }

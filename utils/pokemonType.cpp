@@ -3,53 +3,40 @@
 #include <conio.h>
 #include <windows.h>
 #include <iostream>
-#include <vector>
 #include <string>
 
 using namespace std;
-int seleccionarTipoPokemon(const vector<PokemonType>& tipos)
+
+int seleccionarTipoPokemon(const PokemonType tipos[], int tiposCount)
 {
     int cursor = 0;
     char key;
+
     while (true)
     {
         system("cls");
-        cout << "Jugador 1:" << endl;
-        cout << "Selecciona el tipo de Pokemon que deseas:" << endl;
+        cout << "🌀 ¡Es momento de elegir tu tipo de Pokémon!\n";
+        cout << "Cada tipo tiene sus ventajas. ¡Elige el que más te guste y prepárate para la batalla!\n";
 
-        for (int i = 0; i < tipos.size(); i++)
+        for (int i = 0; i < tiposCount; i++)
         {
-            if (i == cursor)
-            {
-                setColor(tipos[i].color);
-                cout << " > " << tipos[i].name << " <" << endl;
-                setColor(7);
-            }
-            else
-            {
-                setColor(tipos[i].color);
-                cout << "   " << tipos[i].name << endl;
-                setColor(7);
-            }
+            setColor(tipos[i].color);
+            cout << (i == cursor ? " > " : "   ") << tipos[i].name << (i == cursor ? " <\n" : "\n");
+            setColor(7);
         }
 
         key = _getch();
+
         switch (key)
         {
-        case 72: // Flecha arriba
-            cursor--;
-            if (cursor < 0)
-                cursor = tipos.size() - 1;
-            break;
-        case 80: // Flecha abajo
-            cursor++;
-            if (cursor >= tipos.size())
-                cursor = 0;
-            break;
-        case 13: // Enter
-            return cursor;
-        default:
-            break;
+            case 72: // Flecha arriba
+                cursor = (cursor - 1 + tiposCount) % tiposCount;
+                break;
+            case 80: // Flecha abajo
+                cursor = (cursor + 1) % tiposCount;
+                break;
+            case 13: // Enter
+                return cursor;
         }
     }
 }
