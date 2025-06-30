@@ -21,10 +21,10 @@ PokemonType pokemonTypes[] = {
     {"Normal", 7},
 };
 
-const int tiposCount = sizeof(pokemonTypes) / sizeof(pokemonTypes[0]);
+const int typesCount = sizeof(pokemonTypes) / sizeof(pokemonTypes[0]);
 
 // Lista de Pokémon
-Pokemon listaPokemons[] = {
+Pokemon pokemonList[] = {
     {"Charmander", "Fuego", 90, 65, 15, 30, 45},
     {"Growlithe", "Fuego", 96, 60, 14, 28, 42},
     {"Scorbunny", "Fuego", 94, 69, 17, 35, 52},
@@ -51,87 +51,87 @@ Pokemon listaPokemons[] = {
     {"Onix", "Tierra", 89, 70, 13, 25, 38}
 };
 
-const int pokemonsCount = sizeof(listaPokemons) / sizeof(listaPokemons[0]);
+const int pokemonsCount = sizeof(pokemonList) / sizeof(pokemonList[0]);
 
 int main(){
 #ifdef _WIN32
     SetConsoleOutputCP(CP_UTF8); // Para permitir tildes y emojis en Windows
 #endif
 
-    int modo = seleccionarModoJuego();
+    int modo = selectGamemode();
     system("pause");
 
-    string selectedType;
+    string selectedTypeName;
     string selectedPokemon;
 
-    const int maxFiltrados = 50;
-    Pokemon pokemonsFiltrados[maxFiltrados];
+    const int maxFiltered = 50;
+    Pokemon filteredPokemon[maxFiltered];
 
     while (true){
-        selectedType = "";
+        selectedTypeName = "";
         selectedPokemon = "";
 
         // Selección del tipo
-        int tipoSeleccionado = seleccionarTipoPokemon(pokemonTypes, tiposCount, 1);
-        selectedType = pokemonTypes[tipoSeleccionado].name;
-        int colorSeleccionado = pokemonTypes[tipoSeleccionado].color;
+        int selectedType = SelectPokemonType(pokemonTypes, typesCount, 1);
+        selectedTypeName = pokemonTypes[selectedType].name;
+        int selectedTypeColor = pokemonTypes[selectedType].color;
 
         // Filtrar pokémon por tipo
 
-        int cantidadFiltrados = getPokemonsOfType(listaPokemons, pokemonsCount, selectedType, pokemonsFiltrados, maxFiltrados);
+        int filteredQuantity = getPokemonsOfType(pokemonList, pokemonsCount, selectedTypeName, filteredPokemon, maxFiltered);
 
         // Selección de pokémon
         int pokemonCursor = 0;
         while (selectedPokemon == "")
         {
-            showPokemonsOfType(pokemonsFiltrados, cantidadFiltrados, pokemonCursor, colorSeleccionado);
+            showPokemonsOfType(filteredPokemon, filteredQuantity, pokemonCursor, selectedTypeColor);
             char key = _getch();
             switch (key)
             {
                 case 72: // Arriba
-                    pokemonCursor = (pokemonCursor - 1 + cantidadFiltrados) % cantidadFiltrados;
+                    pokemonCursor = (pokemonCursor - 1 + filteredQuantity) % filteredQuantity;
                     break;
                 case 80: // Abajo
-                    pokemonCursor = (pokemonCursor + 1) % cantidadFiltrados;
+                    pokemonCursor = (pokemonCursor + 1) % filteredQuantity;
                     break;
                 case 13: // Enter
-                    selectedPokemon = pokemonsFiltrados[pokemonCursor].name;
+                    selectedPokemon = filteredPokemon[pokemonCursor].name;
                     break;
             }
         }
 
         system("cls");
         cout << "¡Has seleccionado a ";
-        setColor(colorSeleccionado);
+        setColor(selectedTypeColor);
         cout << selectedPokemon;
         setColor(7);
-        cout << " de tipo " << selectedType << "!" << endl;
+        cout << " de tipo " << selectedTypeName << "!" << endl;
 
         // Mostrar stats del seleccionado
-        Pokemon elegido;
-        for (int i = 0; i < cantidadFiltrados; i++)
+        Pokemon chosen;
+        for (int i = 0; i < filteredQuantity; i++)
         {
-            if (pokemonsFiltrados[i].name == selectedPokemon)
+            if (filteredPokemon[i].name == selectedPokemon)
             {
-                elegido = pokemonsFiltrados[i];
+                chosen = filteredPokemon[i];
                 break;
             }
         }
 
-        elegido.mostrarStats();
+        chosen.ShowStats();
 
-        if (confirmarSeleccionDivertida(elegido.name))
+        if (confirmPokemonCatch(chosen.name))
         {
             system("pause");
 
             if (modo == 2) // Solo iniciar modo solitario si modo seleccionado es 2 (Solitario)
             {
-                iniciarModoSolitario(listaPokemons, pokemonsCount, elegido);
+                start1PMode(pokemonList, pokemonsCount, chosen);
                 return 0; // Termina programa cuando acaba la batalla
             }
             else if (modo == 1)
             {
-                iniciarModoDuoFlujo(listaPokemons, pokemonsCount, pokemonTypes, tiposCount, elegido);
+                start2PModeFlow(pokemonList, pokemonsCount, pokemonTypes, typesCount, chosen);
                 return 0; // Termina programa cuando acaba la batalla
             }
         }

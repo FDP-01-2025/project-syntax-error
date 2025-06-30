@@ -4,14 +4,14 @@
 #include "PokemonType.h"
 #include "Pokemon.h"
 
-Pokemon seleccionarPokemonJugador(const Pokemon listaPokemons[], int pokemonsCount,
-                                  const PokemonType tipos[], int tiposCount,
-                                  int jugadorNum);
+Pokemon selectPokemonPlayer(const Pokemon pokemonList[], int pokemonsCount,
+                                  const PokemonType types[], int typesCount,
+                                  int playerNum);
 
-void iniciarModoDuo(const Pokemon& jugador1, const Pokemon& jugador2);
+void start2PMode(const Pokemon &player1, const Pokemon &player2);
 
-void iniciarModoDuoFlujo(const Pokemon listaPokemons[], int pokemonsCount,
-                         const PokemonType tipos[], int tiposCount,
-                         const Pokemon& jugador1);
+void start2PModeFlow(const Pokemon pokemonList[], int pokemonsCount,
+                         const PokemonType types[], int typesCount,
+                         const Pokemon &player1);
 
-#endif
+#endif // DUOBATTLE_H

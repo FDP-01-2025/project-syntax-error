@@ -10,6 +10,6 @@ struct PokemonType
 };
 
 // Ahora devuelve un PokemonType, no un índice
-int seleccionarTipoPokemon(const PokemonType tipos[], int tiposCount, int jugadorNum);
+int SelectPokemonType(const PokemonType types[], int typesCount, int playerNum);
 
 #endif

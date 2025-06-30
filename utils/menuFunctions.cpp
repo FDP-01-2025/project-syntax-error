@@ -18,9 +18,9 @@ void setCursorPosition(int x, int y)
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
-void imprimirAnimado(const string &texto, int ms)
+void animatedPrint(const string &text, int ms)
 {
-    for (char c : texto)
+    for (char c : text)
     {
         cout << c << flush;
         Sleep(ms);
@@ -28,28 +28,28 @@ void imprimirAnimado(const string &texto, int ms)
 }
 
 // Cambiamos a arreglo estático con tamaño fijo
-void imprimirOpciones(const string opciones[], int opcionesSize, int cursor, int startY)
+void showOptions(const string options[], int optionsSize, int cursor, int startY)
 {
-    for (int i = 0; i < opcionesSize; i++)
+    for (int i = 0; i < optionsSize; i++)
     {
         setCursorPosition(0, startY + i);
         if (i == cursor)
         {
             setColor(112); // Fondo azul claro, texto blanco
-            cout << " > " << opciones[i] << " <  ";
+            cout << " > " << options[i] << " <  ";
             setColor(7);
         }
         else
         {
-            cout << "   " << opciones[i] << "    ";
+            cout << "   " << options[i] << "    ";
         }
     }
 }
 
-int seleccionarModoJuego()
+int selectGamemode()
 {
-    const int opcionesSize = 2;
-    string opciones[opcionesSize] = {
+    const int optionsSize = 2;
+    string options[optionsSize] = {
         "Modo Dúo",
         "Modo Solitario"};
 
@@ -57,47 +57,47 @@ int seleccionarModoJuego()
 
     // Animación bienvenida (solo UNA VEZ)
     setColor(6);
-    imprimirAnimado("¡Bienvenido a la Arena Pokémon!  \n\n", 25);
+    animatedPrint("¡Bienvenido a la Arena Pokémon!  \n\n", 25);
 
     setColor(11);
-    imprimirAnimado("Selecciona tu modo de batalla:\n", 20);
+    animatedPrint("Selecciona tu modo de batalla:\n", 20);
     setColor(7);
     cout << "Navega usando las flechas del teclado y confirma tu opción con [Enter].";
 
     int cursor = 0;
-    const int opcionesStartY = 5; // Posición vertical donde comienzan las opciones
+    const int optionsStartY = 5; // Posición vertical donde comienzan las opciones
 
-    imprimirOpciones(opciones, opcionesSize, cursor, opcionesStartY);
+    showOptions(options, optionsSize, cursor, optionsStartY);
 
     while (true)
     {
-        int tecla = _getch();
+        int key = _getch();
 
-        if (tecla == 0 || tecla == 224) // Teclas especiales (flechas)
+        if (key == 0 || key == 224) // Teclas especiales (flechas)
         {
-            tecla = _getch();
-            if (tecla == 72) // Flecha arriba
+            key = _getch();
+            if (key == 72) // Flecha arriba
             {
                 cursor--;
                 if (cursor < 0)
-                    cursor = opcionesSize - 1;
+                    cursor = optionsSize - 1;
             }
-            else if (tecla == 80) // Flecha abajo
+            else if (key == 80) // Flecha abajo
             {
                 cursor++;
-                if (cursor >= opcionesSize)
+                if (cursor >= optionsSize)
                     cursor = 0;
             }
         }
-        else if (tecla == 13) // Enter
+        else if (key == 13) // Enter
         {
-            setCursorPosition(0, opcionesStartY + opcionesSize + 1);
+            setCursorPosition(0, optionsStartY + optionsSize + 1);
             setColor(10);
             cout << "¡Modo seleccionado! Preparando tu aventura...\n";
             setColor(7);
             return cursor + 1;
         }
 
-        imprimirOpciones(opciones, opcionesSize, cursor, opcionesStartY);
+        showOptions(options, optionsSize, cursor, optionsStartY);
     }
 }

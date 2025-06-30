@@ -3,7 +3,7 @@
 
 #include "pokemon.h"
 
-void iniciarModoSolitario(const Pokemon listaPokemons[], int pokemonsCount, const Pokemon& jugadorFijo);
-int seleccionarAtaqueConFlechas(const Pokemon& p);
+void start1PMode(const Pokemon pokemonList[], int pokemonsCount, const Pokemon& staticPlayer);
+int selectAttack(const Pokemon& p);
 
 #endif 

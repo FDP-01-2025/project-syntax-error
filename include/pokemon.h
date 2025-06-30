@@ -13,13 +13,13 @@ struct Pokemon {
     int normalattack;
     int specialattack;
 
-    void mostrarStats() const;
+    void ShowStats() const;
 };
 
 // Declaraciones de funciones
-int getPokemonsOfType(const Pokemon lista[], int listaSize, const string& tipo, Pokemon filtrados[], int maxFiltrados);
+int getPokemonsOfType(const Pokemon list[], int listSize, const string& type, Pokemon filtered[], int maxFiltered);
 void showPokemonsOfType(const Pokemon filtered[], int count, int cursor, int color);
-void showPokemonsNameByType(const Pokemon lista[], int listaSize, const string& tipo);
-bool confirmarSeleccionDivertida(const string& nombrePokemon);
+void showPokemonsNameByType(const Pokemon list[], int listSize, const string& type);
+bool confirmPokemonCatch(const string& nombrePokemon);
 
 #endif

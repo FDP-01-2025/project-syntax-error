@@ -9,7 +9,7 @@ using namespace std;
 
 const int UP = 72, DOWN = 80, ENTER = 13;
 
-int seleccionarAtaqueConFlechas(const Pokemon& p) {
+int selectAttack(const Pokemon& p) {
     int opcion = 0;
     const char* nombres[] = {"Ataque rápido", "Ataque normal", "Ataque especial"};
     int danos[] = {p.fastattack, p.normalattack, p.specialattack};
@@ -23,70 +23,70 @@ int seleccionarAtaqueConFlechas(const Pokemon& p) {
             cout << (i == opcion ? "> " : "  ") << nombres[i] << " (" << danos[i] << " daño)\n";
         }
 
-        int tecla = getch();
-        if (tecla == 0 || tecla == 224) {
-            tecla = getch();
-            if (tecla == UP)
+        int key = getch();
+        if (key == 0 || key == 224) {
+            key = getch();
+            if (key == UP)
                 opcion = (opcion + 2) % 3;
-            else if (tecla == DOWN)
+            else if (key == DOWN)
                 opcion = (opcion + 1) % 3;
-        } else if (tecla == ENTER) {
+        } else if (key == ENTER) {
             system("cls");
             return opcion + 1;
         }
     }
 }
 
-void iniciarModoSolitario(const Pokemon listaPokemons[], int pokemonsCount, const Pokemon& jugadorFijo) {
+void start1PMode(const Pokemon pokemonList[], int pokemonsCount, const Pokemon& jugadorFijo) {
     srand(time(0));
-    int victoriasJugador = 0, victoriasCPU = 0;
+    int victoriasPlayer = 0, victoriasCPU = 0;
 
-    for (int ronda = 1; ronda <= 3; ronda++) {
+    for (int round = 1; round <= 3; round++) {
         system("cls");
         cout << "╭─────────────────────────────────╮\n";
-        cout << "│ Ronda " << ronda << " - ¡Comienza la batalla! │\n";
+        cout << "│ Ronda " << round << " - ¡Comienza la batalla! │\n";
         cout << "╰─────────────────────────────────╯\n";
 
         int cpuIndex;
         do {
             cpuIndex = rand() % pokemonsCount;
-        } while (listaPokemons[cpuIndex].name == jugadorFijo.name);
-        Pokemon cpu = listaPokemons[cpuIndex];
+        } while (pokemonList[cpuIndex].name == jugadorFijo.name);
+        Pokemon cpu = pokemonList[cpuIndex];
 
         cout << "💥 La CPU envía a " << cpu.name << " al campo de batalla. ¡Prepárate!\n\n";
         system("pause");
 
-        int hpJugador = jugadorFijo.hp;
+        int hpPlayer = jugadorFijo.hp;
         int hpCPU = cpu.hp;
 
-        while (hpJugador > 0 && hpCPU > 0) {
+        while (hpPlayer > 0 && hpCPU > 0) {
             // Turno jugador
-            int atk = seleccionarAtaqueConFlechas(jugadorFijo);
-            int danioJugador;
+            int atk = selectAttack(jugadorFijo);
+            int danioPlayer;
             string nombreAtaque;
 
             if (atk == 1) {
-                danioJugador = jugadorFijo.fastattack;
+                danioPlayer = jugadorFijo.fastattack;
                 nombreAtaque = "Ataque rápido";
             } else if (atk == 2) {
-                danioJugador = jugadorFijo.normalattack;
+                danioPlayer = jugadorFijo.normalattack;
                 nombreAtaque = "Ataque normal";
             } else {
-                danioJugador = jugadorFijo.specialattack;
+                danioPlayer = jugadorFijo.specialattack;
                 nombreAtaque = "Ataque especial";
             }
 
             system("cls");
-            cout << "\n🗯️  " << jugadorFijo.name << " usa " << nombreAtaque << " y causa " << danioJugador << " de daño a " << cpu.name << "!\n";
-            hpCPU -= danioJugador;
+            cout << "\n🗯️  " << jugadorFijo.name << " usa " << nombreAtaque << " y causa " << danioPlayer << " de daño a " << cpu.name << "!\n";
+            hpCPU -= danioPlayer;
             if (hpCPU < 0) hpCPU = 0;
             cout << "💢 " << cpu.name << " queda con " << hpCPU << " HP.\n";
             system("pause");
 
             if (hpCPU == 0) {
                 system("cls");
-                cout << "\n🎉 ¡" << jugadorFijo.name << " ha vencido a " << cpu.name << " en esta ronda!\n\n";
-                victoriasJugador++;
+                cout << "\n🎉 ¡" << jugadorFijo.name << " ha vencido a " << cpu.name << " en esta round!\n\n";
+                victoriasPlayer++;
                 break;
             }
 
@@ -107,21 +107,21 @@ void iniciarModoSolitario(const Pokemon listaPokemons[], int pokemonsCount, cons
             }
 
             cout << "\n⚠️  ¡" << cpu.name << " contraataca con " << nombreAtaqueCPU << " causando " << danioCPU << " de daño!\n";
-            hpJugador -= danioCPU;
-            if (hpJugador < 0) hpJugador = 0;
-            cout << "😬 " << jugadorFijo.name << " queda con " << hpJugador << " HP.\n";
+            hpPlayer -= danioCPU;
+            if (hpPlayer < 0) hpPlayer = 0;
+            cout << "😬 " << jugadorFijo.name << " queda con " << hpPlayer << " HP.\n";
             system("pause");
 
-            if (hpJugador == 0) {
+            if (hpPlayer == 0) {
                 system("cls");
-                cout << "\n💀 " << jugadorFijo.name << " ha caído... ¡La CPU gana esta ronda!\n\n";
+                cout << "\n💀 " << jugadorFijo.name << " ha caído... ¡La CPU gana esta round!\n\n";
                 victoriasCPU++;
                 break;
             }
         }
 
         system("cls");
-        cout << "\n🏁 Marcador actual: Jugador " << victoriasJugador << " - CPU " << victoriasCPU << "\n\n";
+        cout << "\n🏁 Marcador actual: Player = " << victoriasPlayer << " - CPU = " << victoriasCPU << "\n\n"; 
         system("pause");
     }
 
@@ -130,9 +130,9 @@ void iniciarModoSolitario(const Pokemon listaPokemons[], int pokemonsCount, cons
     cout << "│ ¡Resultado final de la batalla! │\n";
     cout << "╰─────────────────────────────────╯\n";
 
-    if (victoriasJugador > victoriasCPU)
+    if (victoriasPlayer > victoriasCPU)
         cout << "✨ ¡Felicidades, entrenador! ¡Has ganado la batalla solitaria! ✨\n";
-    else if (victoriasCPU > victoriasJugador)
+    else if (victoriasCPU > victoriasPlayer)
         cout << "👾 La CPU se lleva la victoria. ¡Sigue entrenando!\n";
     else
         cout << "🤝 ¡Ha sido un empate digno de campeones!\n";

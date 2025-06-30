@@ -3,6 +3,7 @@
 
 #include <string>
 
+using namespace std;
 // Cambiar color texto consola
 void setColor(int color);
 
@@ -10,13 +11,13 @@ void setColor(int color);
 void setCursorPosition(int x, int y);
 
 // Imprime texto con efecto máquina de escribir (sin salto de línea automático)
-void imprimirAnimado(const std::string& texto, int ms = 30);
+void animatedPrint(const string& text, int ms = 30);
 
 // Imprime opciones con cursor resaltado a partir de startY
 // Cambiado para recibir arreglo estático y tamaño
-void imprimirOpciones(const std::string opciones[], int opcionesSize, int cursor, int startY);
+void showOptions(const string options[], int optionsSize, int cursor, int startY);
 
 // Función para seleccionar modo de juego con bienvenida animada solo UNA VEZ
-int seleccionarModoJuego();
+int selectGamemode();
 
 #endif
