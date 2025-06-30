@@ -1,13 +1,13 @@
 #include "../include/PokemonType.h"
-#include "../include/Menu.h" // Para setColor
+#include "../include/Menu.h"  // Para setColor
 #include <conio.h>
 #include <windows.h>
 #include <iostream>
-#include <string>
 
 using namespace std;
 
-int seleccionarTipoPokemon(const PokemonType tipos[], int tiposCount)
+// Devuelve el índice del tipo seleccionado (int), recibe jugadorNum para mostrarlo
+int seleccionarTipoPokemon(const PokemonType tipos[], int tiposCount, int jugadorNum)
 {
     int cursor = 0;
     char key;
@@ -15,7 +15,8 @@ int seleccionarTipoPokemon(const PokemonType tipos[], int tiposCount)
     while (true)
     {
         system("cls");
-        cout << "🌀 ¡Es momento de elegir tu tipo de Pokémon!\n";
+        cout << "\nJugador " << jugadorNum << " 🌀 \n" ;
+        cout << "¡Es momento de elegir tu tipo de Pokémon!\n";
         cout << "Cada tipo tiene sus ventajas. ¡Elige el que más te guste y prepárate para la batalla!\n";
 
         for (int i = 0; i < tiposCount; i++)

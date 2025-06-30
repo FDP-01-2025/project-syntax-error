@@ -6,7 +6,8 @@
 #include "include/Menu.h"
 #include "include/Pokemon.h"
 #include "include/PokemonType.h"
-#include "include/SolitaryBattle.h"
+#include "include/SolitaryBattle.h" 
+#include "include/DuoBattle.h"
 
 using namespace std;
 
@@ -52,8 +53,7 @@ Pokemon listaPokemons[] = {
 
 const int pokemonsCount = sizeof(listaPokemons) / sizeof(listaPokemons[0]);
 
-int main()
-{
+int main(){
 #ifdef _WIN32
     SetConsoleOutputCP(CP_UTF8); // Para permitir tildes y emojis en Windows
 #endif
@@ -67,17 +67,17 @@ int main()
     const int maxFiltrados = 50;
     Pokemon pokemonsFiltrados[maxFiltrados];
 
-    while (true)
-    {
+    while (true){
         selectedType = "";
         selectedPokemon = "";
 
         // Selección del tipo
-        int tipoSeleccionado = seleccionarTipoPokemon(pokemonTypes, tiposCount);
+        int tipoSeleccionado = seleccionarTipoPokemon(pokemonTypes, tiposCount, 1);
         selectedType = pokemonTypes[tipoSeleccionado].name;
         int colorSeleccionado = pokemonTypes[tipoSeleccionado].color;
 
         // Filtrar pokémon por tipo
+        
         int cantidadFiltrados = getPokemonsOfType(listaPokemons, pokemonsCount, selectedType, pokemonsFiltrados, maxFiltrados);
 
         // Selección de pokémon
@@ -120,21 +120,26 @@ int main()
 
         elegido.mostrarStats();
 
-
-
         if (confirmarSeleccionDivertida(elegido.name))
         {
-             system("pause");
-            iniciarModoSolitario(listaPokemons, pokemonsCount, elegido);
-            return 0;
+            system("pause");
+
+            if (modo == 2) // Solo iniciar modo solitario si modo seleccionado es 2 (Solitario)
+            {
+                iniciarModoSolitario(listaPokemons, pokemonsCount, elegido);
+                return 0; // Termina programa cuando acaba la batalla
+            }
+            else if (modo == 1)
+            {
+                iniciarModoDuoFlujo(listaPokemons, pokemonsCount, pokemonTypes, tiposCount, elegido);
+                return 0; // Termina programa cuando acaba la batalla
+            }
         }
         else
         {
             cout << "\nRegresando al menú para que elijas otro Pokémon...\n";
             system("pause");
         }
-
-        
     }
 
     return 0;

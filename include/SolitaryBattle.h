@@ -4,5 +4,6 @@
 #include "pokemon.h"
 
 void iniciarModoSolitario(const Pokemon listaPokemons[], int pokemonsCount, const Pokemon& jugadorFijo);
+int seleccionarAtaqueConFlechas(const Pokemon& p);
 
 #endif 
