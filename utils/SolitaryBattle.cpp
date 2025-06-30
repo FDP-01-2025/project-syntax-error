@@ -137,3 +137,4 @@ void iniciarModoSolitario(const Pokemon listaPokemons[], int pokemonsCount, cons
     else
         cout << "🤝 ¡Ha sido un empate digno de campeones!\n";
 }
+

@@ -77,7 +77,7 @@ int main(){
         int colorSeleccionado = pokemonTypes[tipoSeleccionado].color;
 
         // Filtrar pokémon por tipo
-        
+
         int cantidadFiltrados = getPokemonsOfType(listaPokemons, pokemonsCount, selectedType, pokemonsFiltrados, maxFiltrados);
 
         // Selección de pokémon
@@ -141,6 +141,10 @@ int main(){
             system("pause");
         }
     }
+
+    //Para ejecutar g++ main.cpp utils/*.cpp -Iinclude -o juego.exe   
+    // .\juego.exe
+
 
     return 0;
 }

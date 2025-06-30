@@ -16,7 +16,6 @@ Pokemon seleccionarPokemonJugador(const Pokemon listaPokemons[], int pokemonsCou
     Pokemon pokemonsFiltrados[maxFiltrados];
 
     system("cls");
-    // Usamos la función actualizada que devuelve el PokemonType
     int tipoSeleccionado = seleccionarTipoPokemon(tipos, tiposCount, jugadorNum);
     PokemonType tipoElegido = tipos[tipoSeleccionado];
 
@@ -66,12 +65,18 @@ Pokemon seleccionarPokemonJugador(const Pokemon listaPokemons[], int pokemonsCou
         return Pokemon{"", "", 0, 0, 0, 0, 0}; // Selección cancelada
 }
 
-void iniciarModoDuo(const Pokemon& jugador1, const Pokemon& jugador2)
+bool batallaDuo(Pokemon jugador1, Pokemon jugador2, int ronda)
 {
     int hpJugador1 = jugador1.hp;
     int hpJugador2 = jugador2.hp;
 
-    // Determinar quién empieza según velocidad
+    system("cls");
+    cout << "╭─────────────────────────────────╮\n";
+    cout << "│ Ronda " << ronda << " - ¡Comienza la batalla! │\n";
+    cout << "╰─────────────────────────────────╯\n";
+
+    system("pause");
+
     int turno = (jugador1.speed >= jugador2.speed) ? 1 : 2;
 
     while (hpJugador1 > 0 && hpJugador2 > 0)
@@ -81,78 +86,83 @@ void iniciarModoDuo(const Pokemon& jugador1, const Pokemon& jugador2)
             system("cls");
             cout << "Turno de Jugador 1 (" << jugador1.name << ")\n";
             int ataqueJugador1 = seleccionarAtaqueConFlechas(jugador1);
-            int danioJugador1 = 0;
-            string nombreAtaque1;
+            int danio = (ataqueJugador1 == 1) ? jugador1.fastattack :
+                        (ataqueJugador1 == 2) ? jugador1.normalattack : jugador1.specialattack;
+            string nombreAtaque = (ataqueJugador1 == 1) ? "Ataque rápido" :
+                                   (ataqueJugador1 == 2) ? "Ataque normal" : "Ataque especial";
 
-            if (ataqueJugador1 == 1) {
-                danioJugador1 = jugador1.fastattack;
-                nombreAtaque1 = "Ataque rápido";
-            }
-            else if (ataqueJugador1 == 2) {
-                danioJugador1 = jugador1.normalattack;
-                nombreAtaque1 = "Ataque normal";
-            }
-            else {
-                danioJugador1 = jugador1.specialattack;
-                nombreAtaque1 = "Ataque especial";
-            }
-
-            system("cls");
-            cout << "Jugador 1 - " << jugador1.name << " usa " << nombreAtaque1 << " y causa " << danioJugador1 << " de daño.\n";
-            hpJugador2 -= danioJugador1;
+            cout << jugador1.name << " usa " << nombreAtaque << " y causa " << danio << " de daño.\n";
+            hpJugador2 -= danio;
             if (hpJugador2 < 0) hpJugador2 = 0;
-            cout << "Jugador 2 - " << jugador2.name << " tiene " << hpJugador2 << " HP restantes.\n";
+            cout << jugador2.name << " tiene " << hpJugador2 << " HP restantes.\n";
             system("pause");
 
             if (hpJugador2 == 0) break;
-
-            turno = 2; // pasa al jugador 2
+            turno = 2;
         }
-        else // turno == 2
+        else
         {
             system("cls");
             cout << "Turno de Jugador 2 (" << jugador2.name << ")\n";
             int ataqueJugador2 = seleccionarAtaqueConFlechas(jugador2);
-            int danioJugador2 = 0;
-            string nombreAtaque2;
+            int danio = (ataqueJugador2 == 1) ? jugador2.fastattack :
+                        (ataqueJugador2 == 2) ? jugador2.normalattack : jugador2.specialattack;
+            string nombreAtaque = (ataqueJugador2 == 1) ? "Ataque rápido" :
+                                   (ataqueJugador2 == 2) ? "Ataque normal" : "Ataque especial";
 
-            if (ataqueJugador2 == 1) {
-                danioJugador2 = jugador2.fastattack;
-                nombreAtaque2 = "Ataque rápido";
-            }
-            else if (ataqueJugador2 == 2) {
-                danioJugador2 = jugador2.normalattack;
-                nombreAtaque2 = "Ataque normal";
-            }
-            else {
-                danioJugador2 = jugador2.specialattack;
-                nombreAtaque2 = "Ataque especial";
-            }
-
-            system("cls");
-            cout << "Jugador 2 - " << jugador2.name << " usa " << nombreAtaque2 << " y causa " << danioJugador2 << " de daño.\n";
-            hpJugador1 -= danioJugador2;
+            cout << jugador2.name << " usa " << nombreAtaque << " y causa " << danio << " de daño.\n";
+            hpJugador1 -= danio;
             if (hpJugador1 < 0) hpJugador1 = 0;
-            cout << "Jugador 1 - " << jugador1.name << " tiene " << hpJugador1 << " HP restantes.\n";
+            cout << jugador1.name << " tiene " << hpJugador1 << " HP restantes.\n";
             system("pause");
 
             if (hpJugador1 == 0) break;
-
-            turno = 1; // pasa al jugador 1
+            turno = 1;
         }
+    }
+    
+    system("cls");
+    if (hpJugador1 > hpJugador2)
+    {
+        cout << "\n🎉 ¡Jugador 1 gana esta ronda con " << jugador1.name << "!\n";
+        return true;
+    }
+    else
+    {
+        cout << "\n🎉 Jugador 2 gana esta ronda con " << jugador2.name << "!\n";
+        return false;
+    }
+}
+
+void iniciarModoDuo(const Pokemon& jugador1, const Pokemon& jugador2)
+{
+    int puntosJugador1 = 0;
+    int puntosJugador2 = 0;
+
+    for (int ronda = 1; ronda <= 3; ronda++)
+    {
+        bool ganaJugador1 = batallaDuo(jugador1, jugador2, ronda);
+        if (ganaJugador1)
+            puntosJugador1++;
+        else
+            puntosJugador2++;
+
+        cout << "\n🏁 Marcador actual: Jugador 1" << puntosJugador1 << " | Jugador 2 = " << puntosJugador2 << "\n";
+        system("pause");
     }
 
     system("cls");
-     cout << "╭─────────────────────────────────╮\n";
-     cout << "│ ¡Resultado final de la batalla! │\n";
-     cout << "╰─────────────────────────────────╯\n";
+    cout << "╭─────────────────────────────────╮\n";
+    cout << "│ ¡Resultado final de la batalla! │\n";
+    cout << "╰─────────────────────────────────╯\n";
 
-    if (hpJugador1 > hpJugador2)
-        cout << " ✨ ¡Felicidades, jugador 1! ¡Has ganado la batalla solitaria con " << jugador1.name << "! ✨\n";
-    else if (hpJugador2 > hpJugador1)
-         cout << " ✨ ¡Felicidades, jugador 2! ¡Has ganado la batalla solitaria con " << jugador2.name << "!\n ✨";
+
+    if (puntosJugador1 > puntosJugador2)
+        cout << "🏆 ¡Jugador 1 gana la partida con " << puntosJugador1 << " rondas ganadas!\n";
+    else if (puntosJugador2 > puntosJugador1)
+        cout << "🏆 ¡Jugador 2 gana la partida con " << puntosJugador2 << " rondas ganadas!\n";
     else
-        cout << "¡Empate entre ambos jugadores!\n";
+        cout << "🤝 ¡Empate! Ambos jugadores ganaron " << puntosJugador1 << " rondas.\n";
 
     system("pause");
 }
