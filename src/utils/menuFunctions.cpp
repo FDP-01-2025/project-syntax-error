@@ -27,7 +27,6 @@ void animatedPrint(const string &text, int ms)
     }
 }
 
-// Cambiamos a arreglo estático con tamaño fijo
 void showOptions(const string options[], int optionsSize, int cursor, int startY)
 {
     for (int i = 0; i < optionsSize; i++)
@@ -35,7 +34,7 @@ void showOptions(const string options[], int optionsSize, int cursor, int startY
         setCursorPosition(0, startY + i);
         if (i == cursor)
         {
-            setColor(112); // Fondo azul claro, texto blanco
+            setColor(112);
             cout << " > " << options[i] << " <  ";
             setColor(7);
         }
@@ -50,22 +49,22 @@ int selectGamemode()
 {
     const int optionsSize = 2;
     string options[optionsSize] = {
-        "Modo Dúo",
-        "Modo Solitario"};
+        "2 Players Battle",
+        "1 Player Battle"};
 
     system("cls");
 
-    // Animación bienvenida (solo UNA VEZ)
+    // Welcome animation (only ONCE)
     setColor(6);
-    animatedPrint("¡Bienvenido a la Arena Pokémon!  \n\n", 25);
+    animatedPrint("Welcome to the Pokemon Arena!  \n\n", 25);
 
     setColor(11);
-    animatedPrint("Selecciona tu modo de batalla:\n", 20);
+    animatedPrint("Select your battle mode:\n", 20);
     setColor(7);
-    cout << "Navega usando las flechas del teclado y confirma tu opción con [Enter].";
+    cout << "Navigate using the arrow keys and confirm your option with [Enter].";
 
     int cursor = 0;
-    const int optionsStartY = 5; // Posición vertical donde comienzan las opciones
+    const int optionsStartY = 5; // Vertical position where options start
 
     showOptions(options, optionsSize, cursor, optionsStartY);
 
@@ -73,16 +72,16 @@ int selectGamemode()
     {
         int key = _getch();
 
-        if (key == 0 || key == 224) // Teclas especiales (flechas)
+        if (key == 0 || key == 224) // Special keys (arrows)
         {
             key = _getch();
-            if (key == 72) // Flecha arriba
+            if (key == 72) // Up arrow
             {
                 cursor--;
                 if (cursor < 0)
                     cursor = optionsSize - 1;
             }
-            else if (key == 80) // Flecha abajo
+            else if (key == 80) // Down arrow
             {
                 cursor++;
                 if (cursor >= optionsSize)
@@ -93,7 +92,7 @@ int selectGamemode()
         {
             setCursorPosition(0, optionsStartY + optionsSize + 1);
             setColor(10);
-            cout << "¡Modo seleccionado! Preparando tu aventura...\n";
+            cout << "Mode selected! Preparing your adventure...\n";
             setColor(7);
             return cursor + 1;
         }

@@ -2,8 +2,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <conio.h>
-#include "pokemon.h"
-#include "SolitaryBattle.h"
+#include "../include/pokemon.h"
+#include "../include/SolitaryBattle.h"
 
 using namespace std;
 

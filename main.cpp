@@ -144,7 +144,7 @@ int main(){
         }
     }
 
-    // To compile g++ main.cpp utils/*.cpp -Iinclude -o juego.exe
+    // To compile g++ main.cpp src/utils/*.cpp -Iinclude -o juego.exe
     // To run ./juego.exe
 
 
