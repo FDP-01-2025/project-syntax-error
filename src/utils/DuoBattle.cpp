@@ -179,9 +179,10 @@ void start2PMode(const Pokemon &player1, const Pokemon &player2)
     system("pause");
 }
 
-void start2PModeFlow(const Pokemon pokemonList[], int pokemonsCount,
-                     const PokemonType types[], int typesCount,
-                     const Pokemon &player1)
+void start2PModeFlow(
+    const Pokemon pokemonList[], int pokemonsCount,
+    const PokemonType types[], int typesCount,
+    const Pokemon &player1)
 {
     Pokemon player2 = selectPokemonPlayer(pokemonList, pokemonsCount, types, typesCount, 2);
 
