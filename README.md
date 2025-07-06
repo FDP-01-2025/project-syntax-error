@@ -1,112 +1,142 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/mi1WNrHU)
-# Proyecto de C++ - [Pokémon Battle]
+
+
+# Proyecto de C++ - Pokémon Battle
 
 ## Descripción del Proyecto
-Este proyecto consiste en un **juego de batalla por turnos basado en el universo Pokémon**, donde dos jugadores locales compiten eligiendo cada uno un Pokémon con habilidades únicas. El juego se desarrolla completamente en consola usando C++, y hace uso de estructuras y funciones para organizar la lógica, junto con estructuras de control (`if`, `switch`, `while`, `do-while`, `for`) y operaciones para calcular daños, turnos y condiciones de victoria.
+
+Este proyecto consiste en un **juego de batalla por turnos basado en el universo Pokémon**, donde los jugadores pueden competir en dos modos: solitario (contra la CPU) o dúo (dos jugadores locales). Cada jugador elige un Pokémon con habilidades únicas según su tipo. El juego se desarrolla completamente en consola usando C++, y hace uso de estructuras y funciones para organizar la lógica, junto con estructuras de control (`if`, `switch`, `while`) y operaciones para calcular daños, turnos y condiciones de victoria.
 
 ## Equipo
 
-- **Nombre del equipo:** [Syntax Error]
+- **Nombre del equipo:** Syntax Error
 
 ### Integrantes del equipo
 
-1. **Nombre completo:** [Alejandro Antonio Méndez Marenco]  
-   **Carnet:** [00085425]
+1. **Nombre completo:** Alejandro Antonio Méndez Marenco  
+   **Carnet:** 00085425
 
-2. **Nombre completo:** [Gabriela Michelle Navas Quinteros]  
-   **Carnet:** [00167525]
+2. **Nombre completo:** Gabriela Michelle Navas Quinteros  
+   **Carnet:** 00167525
 
-3. **Nombre completo:** [Evelyn Michelle Miranda Acuña]  
-   **Carnet:** [00019425]
+3. **Nombre completo:** Evelyn Michelle Miranda Acuña  
+   **Carnet:** 00019425
 
 ## Instrucciones de Ejecución
 
 1. Clona este repositorio en tu máquina local:
+
    ```bash
-   git clone [https://github.com/FDP-01-2025/project-syntax-error](https://github.com/FDP-01-2025/project-syntax-error)
+   git clone https://github.com/FDP-01-2025/project-syntax-error
    cd project-syntax-error/
-   code .
+   ```
 
 2. Compila el proyecto desde consola:
    ```bash
-   g++ main.cpp -o main
-   .\\main
+   g++ main.cpp utils/*.cpp -Iinclude -o juego.exe
+   .\juego.exe
+   ```
 
 ## Temática y Ambientación
 
-El juego se sitúa en el mundo Pokémon, en un ambiente de duelo entre entrenadores. La ambientación del juego está diseñada para trasladar al jugador a un escenario que recuerda a los combates pokémon, incorporando elementos visuales como ASCII, colores personalizados en consola y efectos de texto que simulan animaciones retro. Al mismo tiempo que mantienen una estructura accesible y funcional desde el punto de vista técnico.
+El juego se sitúa en el mundo Pokémon, en un ambiente de duelo entre entrenadores. La ambientación está diseñada para trasladar al jugador a un escenario que recuerda a los combates Pokémon de los juegos clásicos, incorporando elementos visuales como ASCII, colores personalizados en consola y efectos de texto que simulan animaciones retro. El juego mantiene una estructura accesible y funcional desde el punto de vista técnico.
 
+## Características Principales
+
+- **Dos modos de juego:** Modo Dúo (2 jugadores) y Modo Solitario (contra la CPU)
+- **Selección de tipos de Pokémon:** Agua, Fuego, Tierra, Planta, Eléctrico y Normal
+- **24 Pokémon diferentes** con estadísticas únicas
+- **Sistema de combate por turnos** con 3 tipos de ataques: rápido, normal y especial
+- **Interfaz colorida** con efectos visuales y animaciones de texto
+- **Batallas de 3 rondas** para determinar al ganador final
 
 ## Mecánica Principal
 
-- Juego por turnos entre los jugadores.
-- Elección de Pokémon con características únicas.
-- Ataques con diferentes efectos y probabilidades.
-- Sistema de combate influenciado por la velocidad del Pokémon.
-- Ganador de rondas: el jugador cuyo Pokémon quede con vida al final del combate.
-- Ganador de partidas: el jugador que haya ganado 3 rondas.
+- Juego por turnos entre los jugadores o contra la CPU
+- Elección de Pokémon con características únicas según su tipo
+- Tres tipos de ataques con diferentes niveles de daño
+- Sistema de combate influenciado por la velocidad del Pokémon (determina quién ataca primero)
+- Ganador de rondas: el jugador cuyo Pokémon quede con vida al final del combate
+- Ganador de partidas: el jugador que haya ganado más rondas de las 3 totales
 
-## Idea General de la Jugabilidad
+## Flujo del Juego
 
-1. Pantalla de bienvenida preguntando modo de juego.
-2. Menú de selección para elegir Pokémon.
-3. Muestra de estadísticas.
-4. Inicio del combate:
-   - Turno por jugador, seleccionando ataque.
-   - Se determina el orden por velocidad.
-   - Se aplican daños y se actualiza el HP.
-5. Finaliza cuando uno de los Pokémon es derrotado.
-6. Se muestra un mensaje de victoria.
+1. Pantalla de bienvenida con selección de modo de juego (Dúo o Solitario)
+2. Selección de tipo de Pokémon (Agua, Fuego, Tierra, etc.)
+3. Selección del Pokémon específico dentro del tipo elegido
+4. Confirmación de la selección del Pokémon
+5. En modo Dúo, el segundo jugador selecciona su Pokémon
+6. Inicio de la batalla por rondas:
+   - Determinación del orden de ataque según velocidad
+   - Selección de ataque (rápido, normal o especial)
+   - Aplicación de daño y actualización de HP
+   - Alternancia de turnos hasta que un Pokémon sea derrotado
+7. Tras 3 rondas, se determina el ganador final
+8. Finalización del juego
 
 ## Aplicación de los Temas Vistos en Clase
 
-A continuación se detallan todos los temas vistos en clase y cómo fueron aplicados en el desarrollo del proyecto Pokémon Battle:
+### Variables y Tipos de Datos
+Se utilizan diversos tipos de datos para representar la información del juego:
+- `int` para HP, velocidad, valores de ataque y contadores
+- `string` para nombres de Pokémon y tipos
+- `bool` para estados y condiciones
+- `struct` para definir objetos complejos como Pokémon y tipos
 
-- **Variables y Tipos de Datos**  
-  Se usaron variables para almacenar información como puntos de vida (HP), nombres de Pokémon y ataques, valores numéricos para daños y velocidades, y estados del juego. Se utilizaron tipos básicos como `int`, `float` y `string` entre otros para manejar estos datos.
+### Estructuras Condicionales
+Se implementan para controlar el flujo del juego:
+- `if/else` para verificar condiciones de victoria, orden de ataque y selecciones
+- `switch` para manejar las entradas del usuario en menús
 
-- **Estructuras Condicionales (`if`, `else`, `switch`)**  
-  Se implementaron para tomar decisiones durante la ejecución del juego, como:
-  - Verificar qué jugador ataca primero comparando velocidades.
-  - Determinar si un Pokémon fue derrotado (HP ≤ 0).
-  - Procesar las elecciones del jugador en menús con `switch` para las opciones disponibles.
+### Ciclos
+Utilizados para controlar la repetición de acciones:
+- `while` para mantener los menús activos y las batallas en curso
+- `for` para recorrer listas de Pokémon y mostrar opciones
 
-- **Ciclos (`for`, `while`, `do while`)**  
-  - `for`: para recorrer y mostrar listas de Pokémon y ataques en menús.  
-  - `while`: para mantener activo el ciclo de combate mientras ambos Pokémon tengan HP > 0.  
-  - `do while`: para asegurar que el usuario seleccione opciones válidas en los menús antes de continuar.
+### Funciones
+El código está modularizado en funciones específicas:
+- Funciones de interfaz (`setColor`, `setCursorPosition`, `animatedPrint`)
+- Funciones de selección (`selectGamemode`, `SelectPokemonType`, `selectPokemonPlayer`)
+- Funciones de batalla (`start1PMode`, `start2PMode`, `doubleMatch`)
+- Funciones de utilidad (`getPokemonsOfType`, `showPokemonsOfType`)
 
-- **Funciones**  
-  El código se divide en funciones que realizan tareas específicas, como:
-  - Mostrar menús.
-  - Seleccionar Pokémon y ataques.
-  - Calcular daño y actualizar HP.
-  - Imprimir mensajes con efectos visuales.
-  
-  Esto facilita la reutilización y mejora la organización.
+### Estructuras de Datos
+Se utilizan estructuras para organizar datos relacionados:
+- `struct Pokemon` para almacenar las características de cada Pokémon
+- `struct PokemonType` para definir los tipos disponibles
+- Arreglos para almacenar colecciones de Pokémon y tipos
 
-- **Estructuras de Datos**  
-  Se usaron:
-  - **Estructuras (`struct`)** para definir los datos de Pokémon, ataques y tipos.
+### Interfaz de Usuario
+Se implementa una interfaz en consola con características avanzadas:
+- Colores personalizados para diferentes tipos de Pokémon
+- Posicionamiento del cursor para crear menús interactivos
+- Efectos de texto tipo máquina de escribir
+- Navegación mediante teclado (flechas y Enter)
 
-- **Manejo de Archivos**  
-  Para guardar o cargar datos del juego, como estadísticas o resultados.
+## Estructura del Proyecto
 
-- **Manejo de Errores**  
-  Se incluyeron validaciones para evitar entradas inválidas del usuario, como seleccionar opciones fuera del rango permitido o caracteres no reconocidos. Se manejan mediante bucles que solicitan nuevamente la entrada hasta que es correcta.
-
-- **Interfaz Básica (Consola)**  
-  El juego usa la consola para interacción:
-  - Entrada con `cin` y `getch()` para lectura de teclas.
-  - Salida con `cout` para mostrar información.
-  - Uso de colores y posicionamiento del cursor con funciones de `<windows.h>` para mejorar la experiencia visual.
+```
+project-syntax-error/
+├── include/
+│   ├── DuoBattle.h       # Definiciones para el modo de dos jugadores
+│   ├── Menu.h            # Funciones de interfaz y menús
+│   ├── Pokemon.h         # Estructura de Pokémon y funciones relacionadas
+│   ├── PokemonType.h     # Estructura de tipos de Pokémon
+│   └── SolitaryBattle.h  # Definiciones para el modo de un jugador
+├── utils/
+│   ├── DuoBattle.cpp     # Implementación del modo de dos jugadores
+│   ├── SolitaryBattle.cpp # Implementación del modo de un jugador
+│   ├── menuFunctions.cpp # Implementación de funciones de menú
+│   ├── pokemon.cpp       # Implementación de funciones de Pokémon
+│   └── pokemonType.cpp   # Implementación de funciones de tipos
+├── main.cpp              # Punto de entrada del programa
+└── README.md            # Documentación del proyecto
+```
 
 ## Consideraciones Técnicas
 
-- Desarrollado en C++
-- Uso de consola de Windows 
-- Estructura de carpetas:
-
-
-
-
+- Desarrollado en C++ estándar
+- Uso de la biblioteca `<windows.h>` para efectos visuales en consola
+- Manejo de entrada de usuario con `<conio.h>` para detección de teclas
+- Soporte para caracteres UTF-8 (emojis y caracteres especiales)
+- Compilación mediante g++ con inclusión de múltiples archivos fuente

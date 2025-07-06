@@ -8,9 +8,10 @@
 
 using namespace std;
 
-Pokemon selectPokemonPlayer(const Pokemon pokemonList[], int pokemonsCount,
-                            const PokemonType types[], int typesCount,
-                            int playerNum)
+Pokemon selectPokemonPlayer(
+    const Pokemon pokemonList[], int pokemonsCount,
+    const PokemonType types[], int typesCount,
+    int playerNum)
 {
     const int maxFiltered = 50;
     Pokemon filteredPokemon[maxFiltered];
@@ -87,9 +88,9 @@ bool doubleMatch(Pokemon player1, Pokemon player2, int round)
             cout << "Turno de Player 1 (" << player1.name << ")\n";
             int player1Attack = selectAttack(player1);
             int damage = (player1Attack == 1) ? player1.fastattack : (player1Attack == 2) ? player1.normalattack
-                                                                                            : player1.specialattack;
+                                                                                          : player1.specialattack;
             string attackName = (player1Attack == 1) ? "Ataque rápido" : (player1Attack == 2) ? "Ataque normal"
-                                                                                                  : "Ataque especial";
+                                                                                              : "Ataque especial";
 
             cout << player1.name << " usa " << attackName << " y causa " << damage << " de daño.\n";
             hpPlayer2 -= damage;
@@ -108,9 +109,9 @@ bool doubleMatch(Pokemon player1, Pokemon player2, int round)
             cout << "Turno de Player 2 (" << player2.name << ")\n";
             int player2Attack = selectAttack(player2);
             int damage = (player2Attack == 1) ? player2.fastattack : (player2Attack == 2) ? player2.normalattack
-                                                                                            : player2.specialattack;
+                                                                                          : player2.specialattack;
             string attackName = (player2Attack == 1) ? "Ataque rápido" : (player2Attack == 2) ? "Ataque normal"
-                                                                                                  : "Ataque especial";
+                                                                                              : "Ataque especial";
 
             cout << player2.name << " usa " << attackName << " y causa " << damage << " de daño.\n";
             hpPlayer1 -= damage;

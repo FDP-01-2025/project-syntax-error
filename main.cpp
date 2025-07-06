@@ -3,11 +3,11 @@
 #include <windows.h>
 #include <string>
 
-#include "include/Menu.h"
-#include "include/Pokemon.h"
-#include "include/PokemonType.h"
-#include "include/SolitaryBattle.h" 
-#include "include/DuoBattle.h"
+#include "./src/include/Menu.h"
+#include "./src/include/Pokemon.h"
+#include "./src/include/PokemonType.h"
+#include "./src/include/SolitaryBattle.h" 
+#include "./src/include/DuoBattle.h"
 
 using namespace std;
 
