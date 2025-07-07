@@ -165,6 +165,6 @@ project-syntax-error/
 ### Fin de Ronda
 ![Pantalla de batalla](mockups/6.png)
 
-## Fin de juego
+### Fin de juego
 ![Pantalla de batalla](mockups/7.png)
 
