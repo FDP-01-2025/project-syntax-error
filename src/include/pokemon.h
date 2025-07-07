@@ -16,7 +16,7 @@ struct Pokemon {
     void ShowStats() const;
 };
 
-// Declaraciones de funciones
+// Functions declarations
 int getPokemonsOfType(const Pokemon list[], int listSize, const string& type, Pokemon filtered[], int maxFiltered);
 void showPokemonsOfType(const Pokemon filtered[], int count, int cursor, int color);
 void showPokemonsNameByType(const Pokemon list[], int listSize, const string& type);
