@@ -140,3 +140,7 @@ project-syntax-error/
 - Manejo de entrada de usuario con `<conio.h>` para detección de teclas
 - Soporte para caracteres UTF-8 (emojis y caracteres especiales)
 - Compilación mediante g++ con inclusión de múltiples archivos fuente
+
+## Enlace para flujograma
+[Canva.com](https://www.canva.com/design/DAGsayEc3Oc/_IENcxCIshCvkQEVlI5q9w/edit?utm_content=DAGsayEc3Oc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) 
+![Flowchart](flowchart.jpg)
