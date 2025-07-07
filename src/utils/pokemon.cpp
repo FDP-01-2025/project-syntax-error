@@ -27,7 +27,7 @@ void Pokemon::ShowStats() const {
     cout << "+---------------------------------+\n\n";
 }
 
-// Filters Pokémon by type, fills the filtered array, and returns the count
+// Filters Pokemon by type, fills the filtered array, and returns the count
 int getPokemonsOfType(const Pokemon pokemonList[], int listSize, const string& type, Pokemon filtered[], int maxFiltered) {
     int count = 0;
     for (int i = 0; i < listSize && count < maxFiltered; i++) {
@@ -38,12 +38,12 @@ int getPokemonsOfType(const Pokemon pokemonList[], int listSize, const string& t
     return count;
 }
 
-// Menu to display filtered Pokémon by type
+// Menu to display filtered Pokemon by type
 void showPokemonsOfType(const Pokemon filteredPokemons[], int filteredCount, int cursor, int color) {
     system("cls");
     if (filteredCount == 0) return;
 
-    cout << "Choose a " << filteredPokemons[0].type << "-type Pokémon!\n" << endl;
+    cout << "Choose a " << filteredPokemons[0].type << "-type Pokemon!\n" << endl;
     // setColor(color);
 
     for (int i = 0; i < filteredCount; i++) {
@@ -58,7 +58,7 @@ void showPokemonsOfType(const Pokemon filteredPokemons[], int filteredCount, int
 }
 
 void showPokemonsNameByType(const Pokemon pokemonList[], int listSize, const string& searchedType) {
-    cout << "Pokémon of type " << searchedType << ":\n";
+    cout << "Pokemon of type " << searchedType << ":\n";
     for (int i = 0; i < listSize; i++) {
         if (pokemonList[i].type == searchedType) {
             cout << "  > " << pokemonList[i].name << "\n";
