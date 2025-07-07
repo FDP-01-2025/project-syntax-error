@@ -72,9 +72,9 @@ bool doubleMatch(Pokemon player1, Pokemon player2, int round)
     int hpPlayer2 = player2.hp;
 
     system("cls");
-    cout << "╭─────────────────────────────────╮\n";
+    cout << "╭─────────────────────────────────────────╮\n";
     cout << "│ Round: " << round << " - Battle begins! │\n";
-    cout << "╰─────────────────────────────────╯\n";
+    cout << "╰─────────────────────────────────────────╯\n";
 
     system("pause");
 

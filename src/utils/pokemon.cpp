@@ -69,7 +69,7 @@ void showPokemonsNameByType(const Pokemon pokemonList[], int listSize, const str
 bool confirmPokemonCatch(const string& pokemonName) {
     char answer;
     cout << "Trainer! Are you sure you want to catch " << pokemonName << "? 🌟 \n\n";
-    cout << "Press 'y' to throw a Pokéball or 'n' to think a little more:\n";
+    cout << "Press 'y' to throw a Pokeball or 'n' to think a little more:\n";
     cin >> answer;
 
     answer = tolower(answer);

@@ -45,9 +45,9 @@ void start1PMode(const Pokemon pokemonList[], int pokemonsCount, const Pokemon& 
 
     for (int round = 1; round <= 3; round++) {
         system("cls");
-        cout << "╭─────────────────────────────────╮\n";
+        cout << "╭───────────────────────────────────────────────╮\n";
         cout << "│ Round " << round << " - Let the battle begin! │\n";
-        cout << "╰─────────────────────────────────╯\n";
+        cout << "╰───────────────────────────────────────────────╯\n";
 
         int cpuIndex;
         do {
@@ -129,7 +129,7 @@ void start1PMode(const Pokemon pokemonList[], int pokemonsCount, const Pokemon& 
 
     system("cls");
     cout << "╭─────────────────────────────────╮\n";
-    cout << "│ Final Battle Result │\n";
+    cout << "│       Final Battle Result       │\n"; 
     cout << "╰─────────────────────────────────╯\n";
 
     if (playerWins > cpuWins)
