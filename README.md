@@ -148,23 +148,23 @@ project-syntax-error/
 ## Mockups
 
 ### Pantalla de Inicio
-![Pantalla de inicio](mockups/1.png)
+![Pantalla de inicio](mockups/1[1].png)
 
 ### Selección de Pokemon
 
 | Imagen 1 | Imagen 2 |
 |----------|----------|
-| [ Ver imagen 1](mockups/2.png) | [ Ver imagen 2](mockups/3.png) |
+| [ Ver imagen 1](mockups/2[1].png) | [ Ver imagen 2](mockups/3[1].png) |
 
 ### Pantalla de Batalla
 
 | Imagen 1 | Imagen 2 |
 |----------|----------|
-| [ Ver imagen 1](mockups/4.png) | [ Ver imagen 2](mockups/5.png) |
+| [ Ver imagen 1](mockups/4[1].png) | [ Ver imagen 2](mockups/5[1].png) |
 
 ### Fin de Ronda
-![Pantalla de batalla](mockups/6.png)
+![Pantalla de batalla](mockups/6[1].png)
 
 ### Fin de juego
-![Pantalla de batalla](mockups/7.png)
+![Pantalla de batalla](mockups/7[1].png)
 
