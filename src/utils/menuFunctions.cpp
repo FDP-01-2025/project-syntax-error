@@ -56,6 +56,9 @@ int selectGamemode()
 
     // Welcome animation (only ONCE)
     setColor(6);
+    animatedPrint("(\\_/)\n", 50);
+    animatedPrint("(•.•)\n", 50);
+    animatedPrint("(>  ", 50);  
     animatedPrint("Welcome to the Pokemon Arena!  \n\n", 25);
 
     setColor(11);
@@ -64,7 +67,7 @@ int selectGamemode()
     cout << "Navigate using the arrow keys and confirm your option with [Enter].";
 
     int cursor = 0;
-    const int optionsStartY = 5; // Vertical position where options start
+    const int optionsStartY = 7; // Vertical position where options start
 
     showOptions(options, optionsSize, cursor, optionsStartY);
 

@@ -5,6 +5,7 @@
 #include <iostream>
 #include <conio.h>
 #include <windows.h>
+#include <string>
 
 using namespace std;
 
@@ -73,8 +74,9 @@ bool doubleMatch(Pokemon player1, Pokemon player2, int round)
 
     system("cls");
     cout << "╭─────────────────────────────────────────╮\n";
-    cout << "│ Round: " << round << " - Battle begins! │\n";
+    cout << "│ Round: " << round << " - Battle begins ‼️              │\n";
     cout << "╰─────────────────────────────────────────╯\n";
+    cout << "Get ready to win. . .🥇\n";
 
     system("pause");
 
@@ -92,11 +94,18 @@ bool doubleMatch(Pokemon player1, Pokemon player2, int round)
             string attackName = (player1Attack == 1) ? "Fast attack" : (player1Attack == 2) ? "Normal attack"
                                                                                               : "Special attack";
 
-            cout << player1.name << " uses " << attackName << " and causes" << damage << " damage.\n";  
+            setColor(5);
+            cout << "┌──────────────────────────────────────────────┐\n";
+            cout << "│ " << player1.name << " attacks!                        \n";
+            cout << "│ Used " << attackName << "!                                \n";
+            cout << "│ ⚡ Damage dealt: " << damage << "                            \n";
+            cout << "└──────────────────────────────────────────────┘\n";
+            setColor(3);
             hpPlayer2 -= damage;
             if (hpPlayer2 < 0)
                 hpPlayer2 = 0;
-            cout << player2.name << " has " << hpPlayer2 << " HP left.\n"; 
+            cout << "💢 " << player2.name << " HP ➜ " << hpPlayer2 << "\n";
+            setColor(7);
             system("pause");
 
             if (hpPlayer2 == 0)
@@ -113,11 +122,18 @@ bool doubleMatch(Pokemon player1, Pokemon player2, int round)
             string attackName = (player2Attack == 1) ? "Fast attack" : (player2Attack == 2) ? "Normal attack"
                                                                                               : "Special attack";
 
-            cout << player2.name << " uses " << attackName << " and causes " << damage << " damage.\n";
+            setColor(3);
+            cout << "┌──────────────────────────────────────────────┐\n";
+            cout << "│ " << player2.name << " attacks!                        \n";
+            cout << "│ Used " << attackName << "!                                \n";
+            cout << "│ ⚡ Damage dealt: " << damage << "                            \n";
+            cout << "└──────────────────────────────────────────────┘\n";
+            setColor(5);
             hpPlayer1 -= damage;
             if (hpPlayer1 < 0)
                 hpPlayer1 = 0;
-            cout << player1.name << " has " << hpPlayer1 << " HP left.\n";
+            cout << "💢 " << player1.name << " HP ➜ " << hpPlayer1 << "\n";
+            setColor(7);
             system("pause");
 
             if (hpPlayer1 == 0)
@@ -125,18 +141,20 @@ bool doubleMatch(Pokemon player1, Pokemon player2, int round)
             turn = 1;
         }
     }
-
     system("cls");
-    if (hpPlayer1 > hpPlayer2)
-    {
-        cout << "\n🎉 The winner is Player 1 with " << player1.name << "!\n";
-        return true;
-    }
-    else
-    {
-        cout << "\n🎉 The winner is Player 2 with " << player2.name << "!\n";
-        return false;
-    }
+    string message;
+    
+    if (hpPlayer1 > hpPlayer2) {
+    setColor(5); // 
+    message = "\n🎉 The winner is Player 1 with " + player1.name + "!\n";
+} else {
+    setColor(3); // 
+    message = "\n🎉 The winner is Player 2 with " + player2.name + "!\n";
+}
+animatedPrint(message, 40); 
+setColor(7); 
+return hpPlayer1 > hpPlayer2;
+
 }
 
 void start2PMode(const Pokemon &player1, const Pokemon &player2)
@@ -155,7 +173,8 @@ void start2PMode(const Pokemon &player1, const Pokemon &player2)
         {
             pointsPlayer2++;
         }
-        cout << "\n🏁 Current score: Player 1 = " << pointsPlayer1 << " | Player 2 = " << pointsPlayer2 << "\n";
+        cout << "\nCurrent score... 🕹️\n";
+        cout << "Player one = " << pointsPlayer1 << " | Player two = " << pointsPlayer2 << "\n";
         system("pause");
     }
 
@@ -164,19 +183,20 @@ void start2PMode(const Pokemon &player1, const Pokemon &player2)
     cout << "│   Final result of the battle!   │\n";
     cout << "╰─────────────────────────────────╯\n";
 
-    if (pointsPlayer1 > pointsPlayer2)
-    {
-        cout << "🏆 Player 1 wins the game with " << pointsPlayer1 << " rounds!\n";
-    }
-    else if (pointsPlayer2 > pointsPlayer1)
-    {
-        cout << "🏆 Player 2 wins the game with " << pointsPlayer2 << " rounds!\n";
-    }
-    else
-    {
-        cout << "🤝 It's a draw! Both players won " << pointsPlayer1 << " rounds.\n";
-    }
-    system("pause");
+if (pointsPlayer1 > pointsPlayer2)
+{
+    animatedPrint("🏆 Player 1 wins the game with " + to_string(pointsPlayer1) + " rounds!\n", 40);
+}
+else if (pointsPlayer2 > pointsPlayer1)
+{
+    animatedPrint("🏆 Player 2 wins the game with " + to_string(pointsPlayer2) + " rounds!\n", 40);
+}
+else
+{
+    animatedPrint("🤝 It's a draw! Both players won " + to_string(pointsPlayer1) + " rounds.\n", 40);
+}
+system("pause");
+
 }
 
 void start2PModeFlow(

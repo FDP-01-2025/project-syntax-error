@@ -2,8 +2,10 @@
 #include <cstdlib>
 #include <ctime>
 #include <conio.h>
+#include <windows.h>
 #include "../include/pokemon.h"
 #include "../include/SolitaryBattle.h"
+#include "../include/Menu.h"
 
 using namespace std;
 
@@ -46,7 +48,7 @@ void start1PMode(const Pokemon pokemonList[], int pokemonsCount, const Pokemon& 
     for (int round = 1; round <= 3; round++) {
         system("cls");
         cout << "╭───────────────────────────────────────────────╮\n";
-        cout << "│ Round " << round << " - Let the battle begin! │\n";
+        cout << "│ Round " << round << " - Let the battle begin ‼️              │\n";
         cout << "╰───────────────────────────────────────────────╯\n";
 
         int cpuIndex;
@@ -79,10 +81,17 @@ void start1PMode(const Pokemon pokemonList[], int pokemonsCount, const Pokemon& 
             }
 
             system("cls");
-            cout << "\n🗯️  " << fixedPlayer.name << " uses " << attackName << " and deals " << playerDamage << " damage to " << cpu.name << "!\n";
+            setColor(5);
+            cout << "┌──────────────────────────────────────────────┐\n";
+            cout << "│ " << fixedPlayer.name << " attacks!                        \n";
+            cout << "│ Used " << attackName << "!                                \n";
+            cout << "│ ⚡ Damage dealt: " << playerDamage << "                            \n";
+            cout << "└──────────────────────────────────────────────┘\n";
+            setColor(3);
             hpCPU -= playerDamage;
             if (hpCPU < 0) hpCPU = 0;
-            cout << "💢 " << cpu.name << " has " << hpCPU << " HP remaining.\n";
+            cout << "💢 " << cpu.name << " HP ➜ " << hpCPU << "\n";
+            setColor(7);
             system("pause");
 
             if (hpCPU == 0) {
@@ -108,10 +117,17 @@ void start1PMode(const Pokemon pokemonList[], int pokemonsCount, const Pokemon& 
                 cpuAttackName = "Special Attack";
             }
 
-            cout << "\n⚠️  " << cpu.name << " strikes back with " << cpuAttackName << ", dealing " << cpuDamage << " damage!\n";
+            setColor(3);
+            cout << "\n┌──────────────────────────────────────────────┐\n";
+            cout << "│ " << cpu.name << " strikes back!                   \n";
+            cout << "│ Used " << cpuAttackName << "!                           \n";
+            cout << "│ 🔥 Damage dealt: " << cpuDamage << "                           \n";
+            cout << "└──────────────────────────────────────────────┘\n";
+            setColor(5);
             hpPlayer -= cpuDamage;
             if (hpPlayer < 0) hpPlayer = 0;
-            cout << "😬 " << fixedPlayer.name << " has " << hpPlayer << " HP remaining.\n";
+            cout << "😬 " << fixedPlayer.name << " HP ➜ " << hpPlayer << "\n\n";
+            setColor(7);
             system("pause");
 
             if (hpPlayer == 0) {
@@ -122,9 +138,24 @@ void start1PMode(const Pokemon pokemonList[], int pokemonsCount, const Pokemon& 
             }
         }
 
-        system("cls");
-        cout << "\n🏁 Current Score: Player = " << playerWins << " - CPU = " << cpuWins << "\n\n"; 
-        system("pause");
+    system("cls");
+    string message;
+    
+    if (hpPlayer > hpCPU) {
+    setColor(5); // 
+    message = "\n🎉 The winner is you with " + fixedPlayer.name + "!\n";
+} else {
+    setColor(3); // 
+    message = "\n🎉 The winner is the CPU with " + cpu.name + "!\n";
+}
+animatedPrint(message, 40); 
+setColor(7);
+system("pause");
+
+cout << "\nCurrent score... 🕹️\n";
+cout << fixedPlayer.name << " = " << playerWins << " | CPU = " << cpuWins << "\n";
+system("pause");
+
     }
 
     system("cls");
@@ -133,9 +164,9 @@ void start1PMode(const Pokemon pokemonList[], int pokemonsCount, const Pokemon& 
     cout << "╰─────────────────────────────────╯\n";
 
     if (playerWins > cpuWins)
-        cout << "✨ Congratulations, trainer! You won the solitary battle! ✨\n";
+        animatedPrint("🥇 Congratulations, trainer! You won the solitary battle! 🥇 \n", 40);
     else if (cpuWins > playerWins)
-        cout << "👾 CPU takes the victory. Keep training!\n";
+        animatedPrint("👾 CPU takes the victory. Keep training!", 40);
     else
-        cout << "🤝 It's a draw worthy of champions!\n";
+        animatedPrint("🤝 It's a draw worthy of champions!", 40);
 }
