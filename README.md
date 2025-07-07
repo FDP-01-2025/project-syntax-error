@@ -144,3 +144,27 @@ project-syntax-error/
 ## Enlace para flujograma
 [Canva.com](https://www.canva.com/design/DAGsayEc3Oc/_IENcxCIshCvkQEVlI5q9w/edit?utm_content=DAGsayEc3Oc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) 
 ![Flowchart](flowchart.jpg)
+
+## Mockups
+
+### Pantalla de Inicio
+![Pantalla de inicio](mockups/1.png)
+
+### Selección de Pokemon
+
+| Imagen 1 | Imagen 2 |
+|----------|----------|
+| [ Ver imagen 1](mockups/2.png) | [ Ver imagen 2](mockups/3.png) |
+
+### Pantalla de Batalla
+
+| Imagen 1 | Imagen 2 |
+|----------|----------|
+| [ Ver imagen 1](mockups/4.png) | [ Ver imagen 2](mockups/5.png) |
+
+### Fin de Ronda
+![Pantalla de batalla](mockups/6.png)
+
+## Fin de juego
+![Pantalla de batalla](mockups/7.png)
+
