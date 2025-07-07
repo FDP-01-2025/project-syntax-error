@@ -45,17 +45,18 @@ void start1PMode(const Pokemon pokemonList[], int pokemonsCount, const Pokemon& 
     srand(time(0));
     int playerWins = 0, cpuWins = 0;
 
+    // CPU elige un solo Pokémon antes de las rondas
+    int cpuIndex;
+    do {
+        cpuIndex = rand() % pokemonsCount;
+    } while (pokemonList[cpuIndex].name == fixedPlayer.name);
+    Pokemon cpu = pokemonList[cpuIndex];
+
     for (int round = 1; round <= 3; round++) {
         system("cls");
         cout << "╭───────────────────────────────────────────────╮\n";
         cout << "│ Round " << round << " - Let the battle begin ‼️              │\n";
         cout << "╰───────────────────────────────────────────────╯\n";
-
-        int cpuIndex;
-        do {
-            cpuIndex = rand() % pokemonsCount;
-        } while (pokemonList[cpuIndex].name == fixedPlayer.name);
-        Pokemon cpu = pokemonList[cpuIndex];
 
         cout << "💥 CPU sends out " << cpu.name << " to the battlefield. Get ready!\n\n";
         system("pause");
@@ -138,29 +139,27 @@ void start1PMode(const Pokemon pokemonList[], int pokemonsCount, const Pokemon& 
             }
         }
 
-    system("cls");
-    string message;
-    
-    if (hpPlayer > hpCPU) {
-    setColor(5); // 
-    message = "\n🎉 The winner is you with " + fixedPlayer.name + "!\n";
-} else {
-    setColor(3); // 
-    message = "\n🎉 The winner is the CPU with " + cpu.name + "!\n";
-}
-animatedPrint(message, 40); 
-setColor(7);
-system("pause");
+        system("cls");
+        string message;
 
-cout << "\nCurrent score... 🕹️\n";
-cout << fixedPlayer.name << " = " << playerWins << " | CPU = " << cpuWins << "\n";
-system("pause");
+        if (hpPlayer > hpCPU) {
+            setColor(5);
+            message = "\n🎉 The winner is you with " + fixedPlayer.name + "!\n";
+        } else {
+            setColor(3);
+            message = "\n🎉 The winner is the CPU with " + cpu.name + "!\n";
+        }
+        animatedPrint(message, 40);
+        setColor(7);
 
+        cout << "\nCurrent score... 🕹️\n";
+        cout << fixedPlayer.name << " = " << playerWins << " | CPU = " << cpuWins << "\n";
+        system("pause");
     }
 
     system("cls");
     cout << "╭─────────────────────────────────╮\n";
-    cout << "│       Final Battle Result       │\n"; 
+    cout << "│       Final Battle Result       │\n";
     cout << "╰─────────────────────────────────╯\n";
 
     if (playerWins > cpuWins)
